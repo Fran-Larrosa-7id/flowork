@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    height: 100%;
+    font-family: 'Urbanist', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+:root {
+  --main-color: #ff1f43;        /* Rojo brillante como el fondo animado */
+  --secondary-color: #e50914;   /* Rojo fuerte tipo Netflix para detalles */
+  --background-color: #0b000c;  /* Fondo oscuro total */
+  --text-color: #ffffff;        /* Blanco puro para contraste */
+  --border-color: #8f001c;      /* Bordes más apagados en rojo oscuro */
+  --hover-color: #ff4757;       /* Un rojo claro brillante para hover */
+}
