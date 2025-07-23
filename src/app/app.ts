@@ -9,7 +9,7 @@ import AOS from 'aos';
   styleUrl: './app.scss'
 })
 export class App {
-  protected title = 'Flowwork';
+  protected title = 'Flowork';
   protected isDarkMode = false;
 
 

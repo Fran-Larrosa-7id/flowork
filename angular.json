@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Flowwork": {
+    "Flowork": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -57,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Flowwork:build:production"
+              "buildTarget": "Flowork:build:production"
             },
             "development": {
-              "buildTarget": "Flowwork:build:development"
+              "buildTarget": "Flowork:build:development"
             }
           },
           "defaultConfiguration": "development"
