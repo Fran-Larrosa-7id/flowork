@@ -134,3 +134,86 @@ npm run build --prod
 docker build -t flowwork-frontend .
 docker run -d -p 8080:80 flowwork-frontend
 ```
+
+---
+
+## 🧪 Testing & Calidad de Código
+
+**Flowork** cuenta con una suite completa de pruebas unitarias con alta cobertura para garantizar la calidad y confiabilidad del código.
+
+### 📊 Cobertura Actual
+- **Statements**: 92.1% (35/38)
+- **Branches**: 100% (18/18) ✨
+- **Functions**: 88.88% (8/9)
+- **Lines**: 91.89% (34/37)
+
+### 🎯 Total de Pruebas: **37 pruebas exitosas**
+
+### 🚀 Comandos de Testing
+
+```bash
+# Ejecutar todas las pruebas
+npm test
+
+# Ejecutar pruebas con cobertura
+npm run test:coverage
+
+# Ejecutar pruebas en modo CI (headless)
+npm run test:ci
+```
+
+### 🧪 ¿Qué está probado?
+
+#### **Componente App**
+- ✅ Configuración de tema oscuro/claro
+- ✅ Manejo de localStorage y preferencias del sistema
+- ✅ Integración con AOS (animaciones)
+- ✅ Manipulación de clases CSS
+
+#### **Componente Login**
+- ✅ Validación completa de formularios reactivos
+- ✅ Validación de email y contraseña
+- ✅ Manejo de estados de carga (signals)
+- ✅ Mensajes de error personalizados
+- ✅ Flujos de envío de formulario
+
+### 📈 Reportes de Cobertura
+
+Los reportes se generan automáticamente en la carpeta `coverage/`:
+
+```bash
+# Ver reporte HTML interactivo
+explorer.exe .\coverage\index.html
+```
+
+### 🛠️ Herramientas Utilizadas
+
+- **Framework**: Jasmine + Karma
+- **Navegador de pruebas**: Chrome/ChromeHeadless
+- **Cobertura**: Istanbul
+- **Mocking**: Jasmine Spies para APIs del navegador
+- **CI/CD Ready**: Configurado para integración continua
+
+### ⚙️ Configuración Especial para Apps Zoneless
+
+Como Flowork usa **zoneless change detection**, se requirió configuración adicional:
+
+```bash
+# 1. Instalar Zone.js para testing
+npm install zone.js --save-dev
+
+# 2. Crear polyfills.ts con Zone.js
+# 3. Configurar angular.json para incluir polyfills
+# 4. Configurar karma.conf.js personalizado
+```
+
+> 💡 **Importante**: Las apps zoneless requieren Zone.js específicamente para testing, aunque no lo usen en runtime.
+
+### 🏆 Beneficios
+
+- 🔍 **Detección temprana de bugs**
+- 🔄 **Refactoring seguro**
+- 📝 **Documentación viva del comportamiento**
+- 🚀 **Integración continua lista**
+
+> 💡 **Tip**: Para ver detalles completos sobre testing, consulta el archivo `TESTING.md`

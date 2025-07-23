@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import AOS from 'aos';
 
@@ -8,7 +8,7 @@ import AOS from 'aos';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements OnInit {
   protected title = 'Flowork';
   protected isDarkMode = false;
 

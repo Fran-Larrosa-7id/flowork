@@ -26,8 +26,8 @@ export class Login implements OnInit {
   }
 
   onSubmit() {
-    this.isLoading.set(true);
     if (this.loginForm.valid) {
+      this.isLoading.set(true);
       const formData = this.loginForm.value;
       setTimeout(() => {
         this.isLoading.set(false);
