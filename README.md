@@ -9,7 +9,7 @@
 
 ---
 
-## 🧠 ¿Qué es Flowwork?
+## 🧠 ¿Qué es Flowork?
 
 **Flowork** es un portal de clientes que permite digitalizar y automatizar el proceso de:
 
