@@ -22,3 +22,13 @@ html {
   --border-color: #8f001c;      /* Bordes más apagados en rojo oscuro */
   --hover-color: #ff4757;       /* Un rojo claro brillante para hover */
 }
+
+/* 👻 Fix para el autofill de Chrome que rompe el fondo */
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.1) inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.1) inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: white;
+  transition: background-color 5000s ease-in-out 0s;
+}
+

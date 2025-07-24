@@ -4,10 +4,14 @@
     <div class="relative bg-cover bg-center loginContainer flex items-center justify-center p-12"
         style="background-image: url('/assets/fondo-login.avif');">
         <!-- Capa oscura encima del fondo para contraste -->
-        <div class="absolute inset-0 bg-black/50 "></div>
-        <div class="w-[50%] login rounded-lg relative z-10 p-8 bg-white/10 border border-border shadow-lg backdrop-blur-md text-white"
+        <div class="absolute inset-0 bg-black/20 "></div>
+        <div class="w-[50%] login rounded-lg relative z-10 p-8 bg-white/10 border border-gradient-to-r from-gray-200 via-blue-700 to-purple-500 shadow-lg backdrop-blur-md text-white"
             data-aos="zoom-in">
-            <h2 class="text-3xl font-bold text-main mb-6 text-center">Iniciar sesión</h2>
+            
+            <h2 class="text-center text-4xl font-bold bg-gradient-to-r from-gray-100 via-blue-500 to-purple-700 bg-clip-text text-transparent mb-4">
+                Iniciar sesión
+            </h2>
+
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
                 <div>
@@ -22,7 +26,8 @@
                             [class.focus:ring-main]="!isFieldInvalid('email')"
                             [class.focus:ring-red-500]="isFieldInvalid('email')" placeholder="userTest@gmail.com">
                     </div>
-                    <div *ngIf="isFieldInvalid('email')" class="mt-2 flex items-center gap-2 text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"
+                    <div *ngIf="isFieldInvalid('email')"
+                        class="mt-2 flex items-center gap-2 text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"
                         data-aos="fade-right">
                         <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
                         {{ getFieldError('email') }}
@@ -44,7 +49,8 @@
                             (click)="togglePasswordVisibility()"
                             class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 cursor-pointer hover:text-white transition-colors"></i>
                     </div>
-                    <div *ngIf="isFieldInvalid('password')" class="mt-2 flex items-center gap-2 text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"
+                    <div *ngIf="isFieldInvalid('password')"
+                        class="mt-2 flex items-center gap-2 text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"
                         data-aos="fade-right">
                         <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
                         {{ getFieldError('password') }}
@@ -57,7 +63,7 @@
                 </div>
                 } @else {
                 <button data-aos="zoom-in" type="submit" [disabled]="loginForm.invalid"
-                    class="w-full py-2 rounded-lg font-semibold transition-colors duration-300 "
+                    class="w-full py-2 rounded-lg font-semibold transition-colors duration-300 bg-gradient-to-r from-gray-800 via-blue-600 to-purple-600"
                     [class.bg-main]="loginForm.valid" [class.hover:bg-hover]="loginForm.valid"
                     [class.bg-gray-500]="loginForm.invalid" [class.cursor-not-allowed]="loginForm.invalid"
                     [class.text-white]="loginForm.valid" [class.text-gray-300]="loginForm.invalid">
@@ -76,33 +82,45 @@
 
 
     <!-- Section right info -->
-    <div class="infoCards bg-gradient-to-br from-indigo-100 via-purple-50 to-cyan-100 w-full h-[100vh] relative z-10 p-8 overflow-hidden">
+    <div
+        class="infoCards bg-gradient-to-br from-indigo-100 via-purple-50 to-cyan-100 w-full h-[100vh] relative z-10 p-8 overflow-hidden">
         <!-- Decorative background elements -->
-        <div class="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl"></div>
-        <div class="absolute bottom-20 left-10 w-24 h-24 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-xl"></div>
-        <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-lg"></div>
-        
+        <div
+            class="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl">
+        </div>
+        <div
+            class="absolute bottom-20 left-10 w-24 h-24 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full blur-xl">
+        </div>
+        <div
+            class="absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-lg">
+        </div>
+
         <div class="max-w-4xl mx-auto h-full flex flex-col justify-center relative z-10">
-            <div class="text-center mb-8">
-                <h2 class="text-4xl font-bold bg-gradient-to-r from-gray-800 via-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+            <div data-aos="fade-up" class="text-center mb-8">
+                <h2
+                    class="text-4xl font-bold bg-gradient-to-r from-gray-800 via-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
                     Nuestro servicio
                 </h2>
                 <p class="text-gray-600 text-lg">Conoce todas las opciones que te ofrecemos</p>
                 <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full"></div>
             </div>
-            
+
             <!-- Grid Layout con animaciones más llamativas -->
             <div class="grid grid-cols-3 grid-rows-3 gap-6 h-96">
                 <!-- Card 1: Carga y aprobación de informes de facturación (Top Left) -->
                 <div class="group bg-white/80 backdrop-blur-lg text-gray-800 p-6 rounded-2xl shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 col-span-1 row-span-1 relative overflow-hidden"
                     data-aos="fade-up" data-aos-delay="100">
-                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
                     <div class="flex items-center gap-4 relative z-10">
-                        <div class="bg-gradient-to-br from-blue-100 to-blue-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="bg-gradient-to-br from-blue-100 to-blue-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-file-invoice text-blue-600 text-2xl group-hover:text-blue-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold group-hover:text-blue-700 transition-colors duration-300">Carga y aprobación de informes de facturación</h3>
+                            <h3 class="text-base font-bold group-hover:text-blue-700 transition-colors duration-300">
+                                Carga y aprobación de informes de facturación</h3>
                         </div>
                     </div>
                 </div>
@@ -110,14 +128,20 @@
                 <!-- Card 2: Descarga de facturas (Top Center-Right, spanning 2 cols) -->
                 <div class="group bg-white/80 backdrop-blur-lg text-gray-800 p-6 rounded-2xl shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 col-span-2 row-span-1 relative overflow-hidden"
                     data-aos="fade-up" data-aos-delay="200">
-                    <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
                     <div class="flex items-center gap-4 relative z-10">
-                        <div class="bg-gradient-to-br from-green-100 to-green-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="bg-gradient-to-br from-green-100 to-green-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-download text-green-600 text-2xl group-hover:text-green-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold group-hover:text-green-700 transition-colors duration-300">Descarga de facturas</h3>
-                            <p class="text-gray-600 text-sm mt-1 group-hover:text-green-600 transition-colors duration-300">Accede y descarga todas tus facturas de forma rápida</p>
+                            <h3 class="text-xl font-bold group-hover:text-green-700 transition-colors duration-300">
+                                Descarga de facturas</h3>
+                            <p
+                                class="text-gray-600 text-sm mt-1 group-hover:text-green-600 transition-colors duration-300">
+                                Accede y descarga todas tus facturas de forma rápida</p>
                         </div>
                     </div>
                 </div>
@@ -125,13 +149,17 @@
                 <!-- Card 3: Carga de orden de pago y documentos relacionado (Middle Left) -->
                 <div class="group bg-white/80 backdrop-blur-lg text-gray-800 p-6 rounded-2xl shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 col-span-1 row-span-1 relative overflow-hidden"
                     data-aos="fade-up" data-aos-delay="300">
-                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
                     <div class="flex items-center gap-4 relative z-10">
-                        <div class="bg-gradient-to-br from-purple-100 to-purple-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="bg-gradient-to-br from-purple-100 to-purple-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-file-upload text-purple-600 text-2xl group-hover:text-purple-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold group-hover:text-purple-700 transition-colors duration-300">Carga de orden de pago y documentos relacionado</h3>
+                            <h3 class="text-base font-bold group-hover:text-purple-700 transition-colors duration-300">
+                                Carga de orden de pago y documentos relacionado</h3>
                         </div>
                     </div>
                 </div>
@@ -139,13 +167,17 @@
                 <!-- Card 4: Visualización de resumen de cuenta (Middle Center) -->
                 <div class="group bg-white/80 backdrop-blur-lg text-gray-800 p-6 rounded-2xl shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 col-span-1 row-span-1 relative overflow-hidden"
                     data-aos="fade-up" data-aos-delay="400">
-                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
                     <div class="flex items-center gap-4 relative z-10">
-                        <div class="bg-gradient-to-br from-cyan-100 to-cyan-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                        <div
+                            class="bg-gradient-to-br from-cyan-100 to-cyan-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
                             <i class="fa-solid fa-chart-line text-cyan-600 text-2xl group-hover:text-cyan-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold group-hover:text-cyan-700 transition-colors duration-300">Visualización de resumen de cuenta</h3>
+                            <h3 class="text-base font-bold group-hover:text-cyan-700 transition-colors duration-300">
+                                Visualización de resumen de cuenta</h3>
                         </div>
                     </div>
                 </div>
@@ -153,13 +185,18 @@
                 <!-- Card 5: Alertas e indicadores de mora o incumplimiento (Middle Right) -->
                 <div class="group bg-white/80 backdrop-blur-lg text-gray-800 p-6 rounded-2xl shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 col-span-1 row-span-1 relative overflow-hidden"
                     data-aos="fade-up" data-aos-delay="500">
-                    <div class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
                     <div class="flex items-center gap-4 relative z-10">
-                        <div class="bg-gradient-to-br from-orange-100 to-orange-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                            <i class="fa-solid fa-exclamation-triangle text-orange-600 text-2xl group-hover:text-orange-700"></i>
+                        <div
+                            class="bg-gradient-to-br from-orange-100 to-orange-200 p-4 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                            <i
+                                class="fa-solid fa-exclamation-triangle text-orange-600 text-2xl group-hover:text-orange-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-sm font-bold group-hover:text-orange-700 transition-colors duration-300">Alertas e indicadores de mora o incumplimiento</h3>
+                            <h3 class="text-sm font-bold group-hover:text-orange-700 transition-colors duration-300">
+                                Alertas e indicadores de mora o incumplimiento</h3>
                         </div>
                     </div>
                 </div>
