@@ -1,33 +1,38 @@
-<div class="min-h-screen  flex relative">
+<div class="min-h-screen flex relative flex-col xl:flex-row">
 
     <!-- Section login left -->
-    <div class="relative bg-cover bg-center loginContainer flex items-center justify-center p-12"
+    <div class="relative bg-cover bg-center loginContainer flex items-center justify-center p-12 h-[100dvh] xl:w-[70%]"
         style="background-image: url('/assets/fondo-login.avif');">
         <!-- Capa oscura encima del fondo para contraste -->
-        <div class="absolute inset-0 bg-black/20 "></div>
-        <div class="w-[50%] login rounded-lg relative z-10 p-8 bg-white/10 border border-gradient-to-r from-gray-200 via-blue-700 to-purple-500 shadow-lg backdrop-blur-md text-white"
+        <div class="absolute inset-0 bg-black/50 "></div>
+        <div class=" login rounded-lg relative z-10 p-8 bg-white/10 border border-gradient-to-r from-gray-200 via-blue-700 to-purple-500 shadow-lg backdrop-blur-md text-white"
             data-aos="zoom-in">
-            
-            <h2 class="text-center text-4xl font-bold bg-gradient-to-r from-gray-100 via-blue-500 to-purple-700 bg-clip-text text-transparent mb-4">
+
+            <h2
+                class="text-center text-2xl font-bold bg-gradient-to-r from-gray-300 via-blue-300 to-purple-400 bg-clip-text text-transparent mb-4">
                 Iniciar sesión
             </h2>
 
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
                 <div>
-                    <label for="email" class="block text-sm font-medium text-white">Correo electrónico</label>
+                    <label for="email"
+                        class="block text-sm font-semibold bg-gradient-to-r from-gray-300 via-blue-300 to-purple-400 bg-clip-text text-transparent">
+                        Correo electrónico
+                    </label>
+
                     <div class="relative mt-1">
                         <i
                             class="fa-solid fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60"></i>
                         <input type="email" id="email" formControlName="email"
                             class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/10 text-white border placeholder-white/60 focus:outline-none focus:ring-2 transition"
                             [class.border-red-500]="isFieldInvalid('email')"
-                            [class.border-border]="!isFieldInvalid('email')"
-                            [class.focus:ring-main]="!isFieldInvalid('email')"
+                            [class.border-white]="!isFieldInvalid('email')"
+                            [class.focus:ring-white]="!isFieldInvalid('email')"
                             [class.focus:ring-red-500]="isFieldInvalid('email')" placeholder="userTest@gmail.com">
                     </div>
                     <div *ngIf="isFieldInvalid('email')"
-                        class="mt-2 flex items-center gap-2 text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"
+                        class="mt-2 flex items-center gap-2 text-white text-sm font-medium bg-red-500/40 border border-red-500/20 rounded-lg px-3 py-2"
                         data-aos="fade-right">
                         <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
                         {{ getFieldError('email') }}
@@ -35,22 +40,23 @@
                 </div>
 
                 <div>
-                    <label for="password" class="block text-sm font-medium text-white">Contraseña</label>
+                    <label for="password"
+                        class="block text-sm font-semibold bg-gradient-to-r from-gray-300 via-blue-300 to-purple-400 bg-clip-text text-transparent">Contraseña</label>
                     <div class="relative mt-1">
                         <i
                             class="fa-solid fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60"></i>
                         <input [type]="showPassword() ? 'text' : 'password'" id="password" formControlName="password"
                             class="w-full pl-10 pr-12 py-2 rounded-lg bg-white/10 text-white border placeholder-white/60 focus:outline-none focus:ring-2 transition"
                             [class.border-red-500]="isFieldInvalid('password')"
-                            [class.border-border]="!isFieldInvalid('password')"
-                            [class.focus:ring-main]="!isFieldInvalid('password')"
+                            [class.border-white]="!isFieldInvalid('password')"
+                            [class.focus:ring-white]="!isFieldInvalid('password')"
                             [class.focus:ring-red-500]="isFieldInvalid('password')" placeholder="••••••••">
                         <i [class]="showPassword() ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
                             (click)="togglePasswordVisibility()"
                             class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 cursor-pointer hover:text-white transition-colors"></i>
                     </div>
                     <div *ngIf="isFieldInvalid('password')"
-                        class="mt-2 flex items-center gap-2 text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"
+                        class="mt-2 flex items-center gap-2 text-white text-sm font-medium bg-red-500/40 border border-red-500/20 rounded-lg px-3 py-2"
                         data-aos="fade-right">
                         <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
                         {{ getFieldError('password') }}
@@ -59,7 +65,7 @@
 
                 @if(isLoading()){
                 <div data-aos="fade-right" class="w-full flex items-center justify-center">
-                    <div class="w-10 h-10 border-4 border-t-main border-gray-300 rounded-full animate-spin"></div>
+                    <div class="w-10 h-10 border-4 border-t-white border-purple-700 rounded-full animate-spin"></div>
                 </div>
                 } @else {
                 <button data-aos="zoom-in" type="submit" [disabled]="loginForm.invalid"
@@ -73,7 +79,7 @@
             </form>
         </div>
         <!-- Logo 7 id -->
-        <div class="logo absolute bottom-2 left-1/2 transform -translate-x-1/2">
+        <div class="logo absolute bottom-10 left-1/2 transform -translate-x-1/2">
             <a href="https://sieteideas.com.ar/" target="_blank">
                 <img class="w-28" src="assets/logo/7IDlogo.svg" alt="logo7ideas">
             </a>
@@ -106,7 +112,7 @@
             </div>
 
             <!-- Grid Layout con animaciones más llamativas -->
-            <div class="grid grid-cols-3 grid-rows-3 gap-6 h-96">
+            <div class="grid grid-cols-1 grid-rows-3 lg:grid-rows-3 lg:grid-cols-3 gap-6 h-96">
                 <!-- Card 1: Carga y aprobación de informes de facturación (Top Left) -->
                 <div class="group bg-white/80 backdrop-blur-lg text-gray-800 p-6 rounded-2xl shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 col-span-1 row-span-1 relative overflow-hidden"
                     data-aos="fade-up" data-aos-delay="100">
@@ -119,7 +125,7 @@
                             <i class="fa-solid fa-file-invoice text-blue-600 text-2xl group-hover:text-blue-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold group-hover:text-blue-700 transition-colors duration-300">
+                            <h3 class="text-sm font-bold group-hover:text-blue-700 transition-colors duration-300">
                                 Carga y aprobación de informes de facturación</h3>
                         </div>
                     </div>
@@ -137,7 +143,7 @@
                             <i class="fa-solid fa-download text-green-600 text-2xl group-hover:text-green-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-xl font-bold group-hover:text-green-700 transition-colors duration-300">
+                            <h3 class="text-sm font-bold group-hover:text-green-700 transition-colors duration-300">
                                 Descarga de facturas</h3>
                             <p
                                 class="text-gray-600 text-sm mt-1 group-hover:text-green-600 transition-colors duration-300">
@@ -158,7 +164,7 @@
                             <i class="fa-solid fa-file-upload text-purple-600 text-2xl group-hover:text-purple-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold group-hover:text-purple-700 transition-colors duration-300">
+                            <h3 class="text-sm font-bold group-hover:text-purple-700 transition-colors duration-300">
                                 Carga de orden de pago y documentos relacionado</h3>
                         </div>
                     </div>
@@ -176,7 +182,7 @@
                             <i class="fa-solid fa-chart-line text-cyan-600 text-2xl group-hover:text-cyan-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold group-hover:text-cyan-700 transition-colors duration-300">
+                            <h3 class="text-sm font-bold group-hover:text-cyan-700 transition-colors duration-300">
                                 Visualización de resumen de cuenta</h3>
                         </div>
                     </div>
@@ -201,8 +207,9 @@
                     </div>
                 </div>
             </div>
-
+            <div class="sableLuz absolute bottom-10 w-full">
+                <img class="w-full opacity-90" src="assets/img/espada.svg" alt="">
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
