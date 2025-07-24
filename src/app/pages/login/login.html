@@ -1,58 +1,132 @@
-<div class="min-h-screen  bg-cover bg-center flex items-center justify-center relative"
-    style="background-image: url('/assets/fondo-login.avif');">
-    <!-- Capa oscura encima del fondo para contraste -->
-    <div class="absolute inset-0 bg-black/10"></div>
+<div class="min-h-screen  flex relative">
 
-    <div class="rounded-lg relative z-10 max-w-md w-50% sm:w-[50vw] md:w-[37vw] lg:w-[27vw] p-8 bg-white/10 border border-border shadow-lg backdrop-blur-md text-white"
-        data-aos="zoom-in">
-        <h2 class="text-3xl font-bold text-main mb-6 text-center">Iniciar sesión</h2>
+    <!-- Section login left -->
+    <div class="relative bg-cover bg-center loginContainer flex items-center justify-center p-12"
+        style="background-image: url('/assets/fondo-login.avif');">
+        <!-- Capa oscura encima del fondo para contraste -->
+        <div class="absolute inset-0 bg-black/50 "></div>
+        <div class="w-[50%] login rounded-lg relative z-10 p-8 bg-white/10 border border-border shadow-lg backdrop-blur-md text-white"
+            data-aos="zoom-in">
+            <h2 class="text-3xl font-bold text-main mb-6 text-center">Iniciar sesión</h2>
 
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
-            <div>
-                <label for="email" class="block text-sm font-medium text-white">Correo electrónico</label>
-                <input type="email" id="email" formControlName="email"
-                    class="w-full mt-1 px-4 py-2 rounded-lg bg-white/10 text-white border placeholder-white/60 focus:outline-none focus:ring-2 transition"
-                    [class.border-red-500]="isFieldInvalid('email')" [class.border-border]="!isFieldInvalid('email')"
-                    [class.focus:ring-main]="!isFieldInvalid('email')"
-                    [class.focus:ring-red-500]="isFieldInvalid('email')" placeholder="tu@empresa.com">
-                <div *ngIf="isFieldInvalid('email')" class="mt-1 text-red-700 text-sm font-bold" data-aos="fade-right">
-                    {{ getFieldError('email') }}
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-white">Correo electrónico</label>
+                    <div class="relative mt-1">
+                        <i
+                            class="fa-solid fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60"></i>
+                        <input type="email" id="email" formControlName="email"
+                            class="w-full pl-10 pr-4 py-2 rounded-lg bg-white/10 text-white border placeholder-white/60 focus:outline-none focus:ring-2 transition"
+                            [class.border-red-500]="isFieldInvalid('email')"
+                            [class.border-border]="!isFieldInvalid('email')"
+                            [class.focus:ring-main]="!isFieldInvalid('email')"
+                            [class.focus:ring-red-500]="isFieldInvalid('email')" placeholder="userTest@gmail.com">
+                    </div>
+                    <div *ngIf="isFieldInvalid('email')" class="mt-2 flex items-center gap-2 text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"
+                        data-aos="fade-right">
+                        <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                        {{ getFieldError('email') }}
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <label for="password" class="block text-sm font-medium text-white">Contraseña</label>
-                <input type="password" id="password" formControlName="password"
-                    class="w-full mt-1 px-4 py-2 rounded-lg bg-white/10 text-white border placeholder-white/60 focus:outline-none focus:ring-2 transition"
-                    [class.border-red-500]="isFieldInvalid('password')"
-                    [class.border-border]="!isFieldInvalid('password')"
-                    [class.focus:ring-main]="!isFieldInvalid('password')"
-                    [class.focus:ring-red-500]="isFieldInvalid('password')" placeholder="••••••••">
-                <div *ngIf="isFieldInvalid('password')" class="mt-1 text-red-700 text-sm font-bold"
-                    data-aos="fade-right">
-                    {{ getFieldError('password') }}
+                <div>
+                    <label for="password" class="block text-sm font-medium text-white">Contraseña</label>
+                    <div class="relative mt-1">
+                        <i
+                            class="fa-solid fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60"></i>
+                        <input [type]="showPassword() ? 'text' : 'password'" id="password" formControlName="password"
+                            class="w-full pl-10 pr-12 py-2 rounded-lg bg-white/10 text-white border placeholder-white/60 focus:outline-none focus:ring-2 transition"
+                            [class.border-red-500]="isFieldInvalid('password')"
+                            [class.border-border]="!isFieldInvalid('password')"
+                            [class.focus:ring-main]="!isFieldInvalid('password')"
+                            [class.focus:ring-red-500]="isFieldInvalid('password')" placeholder="••••••••">
+                        <i [class]="showPassword() ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"
+                            (click)="togglePasswordVisibility()"
+                            class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/60 cursor-pointer hover:text-white transition-colors"></i>
+                    </div>
+                    <div *ngIf="isFieldInvalid('password')" class="mt-2 flex items-center gap-2 text-red-400 text-sm font-medium bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2"
+                        data-aos="fade-right">
+                        <i class="fa-solid fa-triangle-exclamation text-red-400"></i>
+                        {{ getFieldError('password') }}
+                    </div>
                 </div>
-            </div>
 
-            @if(isLoading()){
-            <div data-aos="fade-right" class="w-full flex items-center justify-center">
-                <div class="w-10 h-10 border-4 border-t-main border-gray-300 rounded-full animate-spin"></div>
-            </div>
-            } @else {
-            <button data-aos="zoom-in" type="submit" [disabled]="loginForm.invalid"
-                class="w-full py-2 rounded-lg font-semibold transition-colors duration-300 "
-                [class.bg-main]="loginForm.valid" [class.hover:bg-hover]="loginForm.valid"
-                [class.bg-gray-500]="loginForm.invalid" [class.cursor-not-allowed]="loginForm.invalid"
-                [class.text-white]="loginForm.valid" [class.text-gray-300]="loginForm.invalid">
-                Entrar
-            </button>
-            }
-        </form>
+                @if(isLoading()){
+                <div data-aos="fade-right" class="w-full flex items-center justify-center">
+                    <div class="w-10 h-10 border-4 border-t-main border-gray-300 rounded-full animate-spin"></div>
+                </div>
+                } @else {
+                <button data-aos="zoom-in" type="submit" [disabled]="loginForm.invalid"
+                    class="w-full py-2 rounded-lg font-semibold transition-colors duration-300 "
+                    [class.bg-main]="loginForm.valid" [class.hover:bg-hover]="loginForm.valid"
+                    [class.bg-gray-500]="loginForm.invalid" [class.cursor-not-allowed]="loginForm.invalid"
+                    [class.text-white]="loginForm.valid" [class.text-gray-300]="loginForm.invalid">
+                    Entrar
+                </button>
+                }
+            </form>
+        </div>
+        <!-- Logo 7 id -->
+        <div class="logo absolute bottom-2 left-1/2 transform -translate-x-1/2">
+            <a href="https://sieteideas.com.ar/" target="_blank">
+                <img class="w-28" src="assets/logo/7IDlogo.svg" alt="logo7ideas">
+            </a>
+        </div>
     </div>
-    <!-- Logo 7 id -->
-    <div class="logo absolute bottom-2 left-1/2 transform -translate-x-1/2">
-        <a href="https://sieteideas.com.ar/" target="_blank">
-            <img class="w-28" src="assets/logo/7IDlogo.svg" alt="logo7ideas">
-        </a>
+
+
+    <!-- Section right info -->
+    <div class="infoCards   w-full h-[100vh] relative z-10">
+        <div class="bg-black/10 backdrop-blur-md text-white p-8 rounded-lg w-50% sm:w-[50vw] md:w-[37vw] lg:w-[27vw]  right-4 top-4 z-20"
+            data-aos="fade-left">
+            <h3 class="text-xl font-bold mb-4">¿Nuevo en Flowork?</h3>
+            <p class="mb-4">Crea tu cuenta y comienza a disfrutar de todas las funcionalidades que Flowork tiene para
+                ofrecerte.</p>
+            <a href="/register"
+                class="inline-block bg-main hover:bg-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Crear cuenta
+            </a>
+        </div>
+        <!-- <div class="bg-black/10 backdrop-blur-md text-white p-8 rounded-lg max-w-md w-50% sm:w-[50vw] md:w-[37vw] lg:w-[27vw]  right-4 top-4 z-20"
+            data-aos="fade-left">
+            <h3 class="text-xl font-bold mb-4">¿Nuevo en Flowork?</h3>
+            <p class="mb-4">Crea tu cuenta y comienza a disfrutar de todas las funcionalidades que Flowork tiene para
+                ofrecerte.</p>
+            <a href="/register"
+                class="inline-block bg-main hover:bg-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Crear cuenta
+            </a>
+        </div>
+        <div class="bg-black/10 backdrop-blur-md text-white p-8 rounded-lg max-w-md w-50% sm:w-[50vw] md:w-[37vw] lg:w-[27vw]  right-4 top-4 z-20"
+            data-aos="fade-left">
+            <h3 class="text-xl font-bold mb-4">¿Nuevo en Flowork?</h3>
+            <p class="mb-4">Crea tu cuenta y comienza a disfrutar de todas las funcionalidades que Flowork tiene para
+                ofrecerte.</p>
+            <a href="/register"
+                class="inline-block bg-main hover:bg-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Crear cuenta
+            </a>
+        </div>
+        <div class="bg-black/10 backdrop-blur-md text-white p-8 rounded-lg max-w-md w-50% sm:w-[50vw] md:w-[37vw] lg:w-[27vw]  right-4 top-4 z-20"
+            data-aos="fade-left">
+            <h3 class="text-xl font-bold mb-4">¿Nuevo en Flowork?</h3>
+            <p class="mb-4">Crea tu cuenta y comienza a disfrutar de todas las funcionalidades que Flowork tiene para
+                ofrecerte.</p>
+            <a href="/register"
+                class="inline-block bg-main hover:bg-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Crear cuenta
+            </a>
+        </div>
+        <div class="bg-black/10 backdrop-blur-md text-white p-8 rounded-lg max-w-md w-50% sm:w-[50vw] md:w-[37vw] lg:w-[27vw]  right-4 top-4 z-20"
+            data-aos="fade-left">
+            <h3 class="text-xl font-bold mb-4">¿Nuevo en Flowork?</h3>
+            <p class="mb-4">Crea tu cuenta y comienza a disfrutar de todas las funcionalidades que Flowork tiene para
+                ofrecerte.</p>
+            <a href="/register"
+                class="inline-block bg-main hover:bg-hover text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-300">
+                Crear cuenta
+            </a>
+        </div> -->
     </div>
+
 </div>

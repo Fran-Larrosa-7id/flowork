@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Login implements OnInit {
   isLoading = signal<boolean>(false);
+  showPassword = signal<boolean>(false);
   loginForm: FormGroup;
 
   constructor(
@@ -37,6 +38,11 @@ export class Login implements OnInit {
       // Marcar todos los campos como tocados para mostrar errores
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  // Método para alternar la visibilidad de la contraseña
+  togglePasswordVisibility() {
+    this.showPassword.set(!this.showPassword());
   }
 
   // Métodos helper para validaciones en el template
