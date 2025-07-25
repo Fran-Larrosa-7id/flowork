@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Flowork": {
+    "PortalBiz": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -57,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Flowork:build:production"
+              "buildTarget": "PortalBiz:build:production"
             },
             "development": {
-              "buildTarget": "Flowork:build:development"
+              "buildTarget": "PortalBiz:build:development"
             }
           },
           "defaultConfiguration": "development"

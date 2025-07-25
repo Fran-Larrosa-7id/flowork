@@ -1,4 +1,4 @@
-# 🚀 Flowork
+# 🚀 Portal Biz
 
 > Plataforma para la gestión eficiente del flujo de facturación entre cliente y comercial.
 
@@ -9,9 +9,9 @@
 
 ---
 
-## 🧠 ¿Qué es Flowork?
+## 🧠 ¿Qué es Portal Biz?
 
-**Flowork** es un portal de clientes que permite digitalizar y automatizar el proceso de:
+**Portal Biz** es un portal de clientes que permite digitalizar y automatizar el proceso de:
 
 - Carga y aprobación de informes de facturación
 - Descarga de facturas
@@ -48,9 +48,9 @@ ng serve
 ```
 npm run build --prod
 
-docker build -t flowork-frontend .
+docker build -t portalbiz-frontend .
 
-docker run -d -p 8080:80 flowork-frontend
+docker run -d -p 8080:80 portalbiz-frontend
 ```
 ## 👥 Equipo Flowwork
 
@@ -139,7 +139,7 @@ docker run -d -p 8080:80 flowwork-frontend
 
 ## 🧪 Testing & Calidad de Código
 
-**Flowork** cuenta con una suite completa de pruebas unitarias con alta cobertura para garantizar la calidad y confiabilidad del código.
+**Portal Biz** cuenta con una suite completa de pruebas unitarias con alta cobertura para garantizar la calidad y confiabilidad del código.
 
 ### 📊 Cobertura Actual
 - **Statements**: 92.1% (35/38)
@@ -196,7 +196,7 @@ explorer.exe .\coverage\index.html
 
 ### ⚙️ Configuración Especial para Apps Zoneless
 
-Como Flowork usa **zoneless change detection**, se requirió configuración adicional:
+Como Portal Biz usa **zoneless change detection**, se requirió configuración adicional:
 
 ```bash
 # 1. Instalar Zone.js para testing

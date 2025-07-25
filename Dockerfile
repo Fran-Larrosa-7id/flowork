@@ -11,7 +11,7 @@ RUN npm run build --prod
 FROM nginx:stable-alpine
 
 # Copia el build al nginx
-COPY --from=builder /app/dist/Flowork/browser /usr/share/nginx/html
+COPY --from=builder /app/dist/PortalBiz/browser /usr/share/nginx/html
 
 # Reemplaza la config por una custom
 COPY nginx.conf /etc/nginx/conf.d/default.conf

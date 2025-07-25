@@ -1,4 +1,4 @@
-# Testing Guide - Flowork
+# Testing Guide - Portal Biz
 
 ## 📋 Resumen de Pruebas
 
@@ -101,7 +101,7 @@ open ./coverage/index.html
 
 ### ⚙️ Configuración Especial para Apps Zoneless
 
-Como Flowork utiliza **zoneless change detection** de Angular, fue necesario realizar configuraciones adicionales para que las pruebas funcionen correctamente:
+Como Portal Biz utiliza **zoneless change detection** de Angular, fue necesario realizar configuraciones adicionales para que las pruebas funcionen correctamente:
 
 #### 1. **Instalación de Zone.js para testing**
 ```bash
@@ -228,4 +228,4 @@ describe('ComponentName', () => {
 
 ---
 
-¡Con esta suite de pruebas tienes una base sólida para mantener la calidad del código en Flowork! 🚀
+¡Con esta suite de pruebas tienes una base sólida para mantener la calidad del código en Portal Biz! 🚀

@@ -71,7 +71,7 @@ describe('App', () => {
     });
 
     it('should have the correct title', () => {
-      expect(component['title']).toBe('Flowork');
+      expect(component['title']).toBe('Portal Biz');
     });
 
     it('should initialize isDarkMode as false', () => {

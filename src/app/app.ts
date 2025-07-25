@@ -9,7 +9,7 @@ import AOS from 'aos';
   styleUrl: './app.scss'
 })
 export class App implements OnInit {
-  protected title = 'Flowork';
+  protected title = 'Portal Biz';
   protected isDarkMode = false;
 
 
