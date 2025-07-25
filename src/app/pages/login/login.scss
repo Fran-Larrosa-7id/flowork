@@ -17,6 +17,11 @@
     .cards {
         height: 100dvh;
     }
+
+    .card{
+        min-height: unset !important;
+        height: 90px;
+    }
 }
 
 @media (min-height: 648px) {
