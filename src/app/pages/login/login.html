@@ -1,7 +1,7 @@
-<div class="min-h-[100dvh] flex relative flex-col xl:flex-row">
+<div class="min-h-screen flex flex-col xl:flex-row">
 
     <!-- Section login left -->
-    <div class="relative bg-cover bg-center loginContainer flex items-center justify-center p-12 h-[100dvh] xl:w-[70%]"
+    <div class="relative bg-cover bg-center loginContainer flex items-center justify-center p-12 min-h-screen xl:min-h-0 xl:h-auto xl:w-[70%]"
         style="background-image: url('assets/fondo-login.avif');">
         <!-- Capa oscura encima del fondo para contraste -->
         <div class="absolute inset-0 bg-black/50 "></div>
@@ -89,7 +89,7 @@
 
     <!-- Section right info -->
     <div
-        class="infoCards bg-gradient-to-br from-indigo-100 via-purple-50 to-cyan-100 w-full h-[100dvh] relative z-10 p-8 overflow-hidden">
+        class="infoCards bg-gradient-to-br from-indigo-100 via-purple-50 to-cyan-100 w-full relative z-10 p-8 overflow-hidden">
         <!-- Decorative background elements -->
         <div
             class="absolute top-10 right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-400/20 rounded-full blur-xl">
@@ -132,7 +132,8 @@
                 </div>
 
                 <!-- Card 2: Descarga de facturas (Top Center-Right, spanning 2 cols) -->
-                <div class="group card bg-white/80 backdrop-blur-lg text-gray-800 p-2 xsl:p-4 sm:p-6 rounded-2xl shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 md:col-span-2 md:row-span-1 relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <div class="group card bg-white/80 backdrop-blur-lg text-gray-800 p-2 xsl:p-4 sm:p-6 rounded-2xl shadow-xl border border-white/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 md:col-span-2 md:row-span-1 relative overflow-hidden"
+                    data-aos="fade-up" data-aos-delay="200">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     </div>
@@ -142,7 +143,8 @@
                             <i class="fa-solid fa-download text-green-600 text-2xl group-hover:text-green-700"></i>
                         </div>
                         <div>
-                            <h3 class="text-xs md:text-sm font-bold group-hover:text-green-700 transition-colors duration-300">
+                            <h3
+                                class="text-xs md:text-sm font-bold group-hover:text-green-700 transition-colors duration-300">
                                 Descarga de facturas</h3>
                             <p
                                 class="text-gray-600 text-xs md:text-sm mt-1 group-hover:text-green-600 transition-colors duration-300">
@@ -206,9 +208,57 @@
                     </div>
                 </div>
             </div>
-            <div class="hidden md:block sableLuz absolute bottom-10 w-full" data-aos="fade-up">
+            <div class="hidden md:block sableLuz absolute bottom-10 w-full" data-aos="fade-up"
+                data-aos-anchor-placement="top-bottom" data-aos-once="true" data-aos-delay="0" data-aos-duration="1000">
                 <img class="w-full opacity-90" src="assets/img/espada.svg" alt="">
             </div>
+
         </div>
 
     </div>
+</div>
+<!-- Footer -->
+<footer class="bg-[#0b000c] text-white px-6 py-10 min-h-[336px]">
+    <div
+        class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center text-center lg:text-left">
+
+        <!-- Logo + link -->
+        <a data-aos="zoom-in" href="assets/7id_SOFTWARE_S.A.S_9001.pdf" target="_blank"
+            class="flex flex-col items-center justify-center">
+            <img src="assets/iram_logo.svg" alt="Certificación IRAM" class="w-64 mx-auto">
+            <p class="text-lg mt-2">Siete Ideas Quality Policy</p>
+        </a>
+
+        <!-- Info de contacto -->
+        <div class="flex flex-col items-center lg:items-start justify-center gap-4 text-sm md:text-xl">
+            <div data-aos="fade-right" class="flex items-center gap-3">
+                <i class="fas fa-map-marker-alt text-main"></i>
+                <span>Constitución 424, Tandil</span>
+            </div>
+            <div data-aos="fade-left" class="flex items-center gap-3">
+                <i class="fas fa-phone-alt text-main"></i>
+                <a href="tel:+542494387687" class="hover:underline">(0249) 438-7687</a>
+            </div>
+            <div data-aos="fade-right" class="flex items-center gap-3">
+                <i class="fas fa-envelope text-main"></i>
+                <a href="mailto:info@sieteideas.com.ar" class="hover:underline">{{'info@sieteideas.com.ar'}}</a>
+            </div>
+            <!-- Linkedin -->
+            <div class="flex items-center gap-3" data-aos-anchor-placement="top-bottom"  data-aos-delay="0" data-aos-duration="1000" data-aos="fade-left">
+                <i class="fab fa-linkedin text-main"></i>
+                <a href="https://www.linkedin.com/company/siete-ideas/posts/?feedView=all" target="_blank"
+                    class="hover:underline">Siete Ideas</a>
+            </div>
+        </div>
+
+        <!-- Mapa -->
+        <div data-aos="fade-right" class="w-full h-64 rounded overflow-hidden shadow-md">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.394131210715!2d-59.135459100000006!3d-37.33317679999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95911fbda19f307d%3A0xced88161234568a3!2sConstituci%C3%B3n%20424%2C%20B7000%20Tandil%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1751635773959!5m2!1ses-419!2sar"
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade" class="w-full h-full">
+            </iframe>
+        </div>
+
+    </div>
+</footer>
