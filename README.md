@@ -52,7 +52,7 @@ docker build -t portalbiz-frontend .
 
 docker run -d -p 8080:80 portalbiz-frontend
 ```
-## 👥 Equipo Flowwork
+## 👥 Equipo Portal Biz
 
 | 🧑‍💼 Nombre              | 🛠️ Rol                                 |
 |-------------------------|----------------------------------------|
@@ -93,7 +93,7 @@ RUN npm run build --prod
 
 # Etapa 2: NGINX para servir el build
 FROM nginx:stable-alpine
-COPY --from=builder /app/dist/flowwork /usr/share/nginx/html
+COPY --from=builder /app/dist/PortalBiz /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
@@ -131,8 +131,9 @@ README.md
 4. **Comandos para levantar la app dockerizada**:
 ```
 npm run build --prod
-docker build -t flowwork-frontend .
-docker run -d -p 8080:80 flowwork-frontend
+docker build -t portalbiz-frontend .
+
+docker run -d -p 8080:80 portalbiz-frontend
 ```
 
 ---

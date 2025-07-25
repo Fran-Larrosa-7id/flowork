@@ -1,0 +1,26 @@
+.cards {
+    height: 80%;
+}
+
+.card {
+    min-height: 70px;
+}
+
+@media (min-width: 480px) {
+    .cards {
+        height: 24rem;
+    }
+}
+
+@media (max-width: 390px) {
+
+    .cards {
+        height: 100dvh;
+    }
+}
+
+@media (min-height: 648px) {
+    .card{
+        min-height: 80px;
+    }
+}
