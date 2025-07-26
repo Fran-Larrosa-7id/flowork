@@ -5,22 +5,28 @@
 
 html,
 body {
-    height: 100%;
-    font-family: 'Urbanist', sans-serif;
+  height: 100%;
+  font-family: 'Urbanist', sans-serif;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 
 :root {
-  --main-color: #ff1f43;        /* Rojo brillante como el fondo animado */
-  --secondary-color: #e50914;   /* Rojo fuerte tipo Netflix para detalles */
-  --background-color: #0b000c;  /* Fondo oscuro total */
-  --text-color: #ffffff;        /* Blanco puro para contraste */
-  --border-color: #8f001c;      /* Bordes más apagados en rojo oscuro */
-  --hover-color: #ff4757;       /* Un rojo claro brillante para hover */
+  --main-color: #ff1f43;
+  /* Rojo brillante como el fondo animado */
+  --secondary-color: #e50914;
+  /* Rojo fuerte tipo Netflix para detalles */
+  --background-color: #0b000c;
+  /* Fondo oscuro total */
+  --text-color: #ffffff;
+  /* Blanco puro para contraste */
+  --border-color: #8f001c;
+  /* Bordes más apagados en rojo oscuro */
+  --hover-color: #ff4757;
+  /* Un rojo claro brillante para hover */
 }
 
 /* 👻 Fix para el autofill de Chrome que rompe el fondo */
@@ -32,3 +38,44 @@ input:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+.splashScreen {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-image: url('assets/fondo-login.avif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 9999;
+}
+
+
+.splasShow {
+  display: block;
+  overflow: hidden;
+  /* Esto ocultará la barra de desplazamiento */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE y Edge */
+}
+
+.splashShow::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari y Opera */
+}
+
+.splashHide {
+  display: none;
+}
+
+body.no-scrollbar {
+  overflow: hidden;
+}
+
+body.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari y Opera */
+}
