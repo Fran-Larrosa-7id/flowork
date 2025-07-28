@@ -198,21 +198,24 @@
             </div>
             <div class="hidden md:block absolute bottom-0 w-[10%]" data-aos="fade-up"
                 data-aos-anchor-placement="top-bottom" data-aos-once="true" data-aos-delay="0" data-aos-duration="1000">
-                <!-- Speech bubble con texto -->
-                <div class="relative mb-2">
-                    <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-gray-200 relative">
-                        <h1 class="text-sm font-bold text-center font-sans textGenerated text-gray-800">
-                            <ng-container *ngFor="let c of typedChars()">
-                                <span [ngClass]="c.class">{{ c.char }}</span>
-                            </ng-container>
-                            <span class="animate-pulse">|</span>
-                        </h1>
-                        <!-- Flecha del globo apuntando hacia abajo -->
-                        <div class="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-white/90"></div>
+                <div class="relative flex items-center">
+                    <!-- Imagen del robot -->
+                    <img class="w-full" src="assets/img/seven_saludando.png" alt="Robot saludando">
+                    
+                    <!-- Speech bubble con texto a la derecha -->
+                    <div class="absolute left-full ml-2 bottom-1/2 transform translate-y-1/2">
+                        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-gray-200 relative whitespace-nowrap">
+                            <h1 class="text-sm font-bold font-sans textGenerated text-gray-800">
+                                <ng-container *ngFor="let c of typedChars()">
+                                    <span [ngClass]="c.class">{{ c.char }}</span>
+                                </ng-container>
+                                <span class="animate-pulse">|</span>
+                            </h1>
+                            <!-- Flecha del globo apuntando hacia la izquierda (al robot) -->
+                            <div class="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-b-[8px] border-r-[8px] border-t-transparent border-b-transparent border-r-white/90"></div>
+                        </div>
                     </div>
                 </div>
-                <!-- Imagen del robot -->
-                <img class="w-full" src="assets/img/seven_saludando.png" alt="Robot saludando">
             </div>
         </div>
 
