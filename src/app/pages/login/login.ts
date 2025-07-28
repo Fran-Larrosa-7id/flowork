@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 interface TypedChar {
@@ -11,7 +11,7 @@ interface TypedChar {
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
-export class Login implements OnInit {
+export class Login implements OnInit, AfterViewInit {
   isLoading = signal<boolean>(false);
   showPassword = signal<boolean>(false);
   loginForm: FormGroup;
@@ -48,6 +48,18 @@ export class Login implements OnInit {
       // Marcar todos los campos como tocados para mostrar errores
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  ngAfterViewInit(): void {
+    const video = document.querySelector('.videoRobot') as HTMLVideoElement;
+    const playVideo = () => {
+      video.play().catch(() => console.log('🛑 No se pudo reproducir'));
+    };
+
+    // Solo se ejecuta una vez al interactuar
+    ['click', 'touchstart', 'scroll'].forEach((event) =>
+      window.addEventListener(event, playVideo, { once: true })
+    );
   }
 
   typeLoop(): void {
