@@ -24,6 +24,58 @@
     }
 }
 
+@media (max-height: 803px) {
+    .loginContainer{
+        >img {
+            top: 20% !important;
+        }
+    }
+}
+@media (max-height: 713px) {
+    .loginContainer{
+        >img {
+            top: 17% !important;
+        }
+    }
+}
+@media (max-height: 684px) {
+    .loginContainer{
+        >img {
+            top: 14% !important;
+        }
+    }
+}
+@media (max-height: 626px) {
+    .loginContainer{
+        >img {
+            top: 11% !important;
+        }
+    }
+}
+@media (max-height: 573px) {
+    .loginContainer{
+        >img {
+            top: 8% !important;
+        }
+    }
+}
+@media (max-height: 535px) {
+    .loginContainer{
+        >img {
+            top: 6% !important;
+        }
+    }
+}
+@media (max-height: 506px) {
+    .loginContainer{
+        >img {
+            top: 4% !important;
+        }
+    }
+}
+
+
+
 @media (min-height: 648px) {
     .card{
         min-height: 80px;
@@ -33,3 +85,4 @@
 .loginContainer{
     background-image: radial-gradient( circle farthest-corner at 6.3% 21.8%,  rgba(236,6,117,1) 0%, rgb(0, 0, 0) 90% );
 }
+
