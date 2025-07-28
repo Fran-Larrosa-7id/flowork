@@ -20,14 +20,23 @@
 </head>
 
 <body>
-  <div class="splashScreen">
-    <!-- <img class="logoAngular" src="assets/logo/logo.png">
-    <div class="spinner">
-      <div class="bounce1"></div>
-      <div class="bounce2"></div>
-      <div class="bounce3"></div>
-    </div> -->
-    <div class="bg-red-700 h-[300px]">
+  <div class="relative splashScreen">
+    <!-- Capa oscura encima del fondo para contraste -->
+    <div class="absolute inset-0 bg-black/70"></div>
+    
+    <!-- Contenedor con animaciones -->
+    <div class="h-auto flex flex-col items-center justify-center p-4 z-50">
+      <!-- Logo con animación de entrada -->
+      <div class="logo-container">
+        <img src="assets/logo/portalbiz.svg" alt="Portal Biz Logo" class="splash-logo">
+      </div>
+      
+      <!-- Puntos de carga animados -->
+      <div class="loading-dots mt-8">
+        <div class="dot dot-1"></div>
+        <div class="dot dot-2"></div>
+        <div class="dot dot-3"></div>
+      </div>
 
     </div>
   </div>

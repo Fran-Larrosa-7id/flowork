@@ -88,3 +88,104 @@ body.no-scrollbar::-webkit-scrollbar {
   display: none;
   /* Chrome, Safari y Opera */
 }
+
+/* === ANIMACIONES SPLASH SCREEN === */
+
+/* Animación del logo principal */
+.splash-logo {
+  max-width: 80vw;
+  animation: logoEntrance 2s ease-out forwards;
+  transform: scale(0.5) translateY(-30px);
+  opacity: 0;
+}
+
+@keyframes logoEntrance {
+  0% {
+    transform: scale(0.5) translateY(-30px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) translateY(0px);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) translateY(0px);
+    opacity: 1;
+  }
+}
+
+/* Contenedor del logo con efecto de pulso sutil */
+.logo-container {
+  animation: logoPulse 3s ease-in-out infinite 2s; /* Empieza después de 2s */
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Puntos de carga animados */
+.loading-dots {
+  display: flex;
+  gap: 8px;
+  animation: dotsAppear 0.5s ease-out 1.5s forwards;
+  opacity: 0;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #ff1f43, #e50914);
+  animation: dotBounce 1.4s ease-in-out infinite;
+}
+
+.dot-1 { animation-delay: 0s; }
+.dot-2 { animation-delay: 0.2s; }
+.dot-3 { animation-delay: 0.4s; }
+
+@keyframes dotBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-15px);
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(255, 31, 67, 0.5);
+  }
+}
+
+@keyframes dotsAppear {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Texto de carga */
+.loading-text {
+  font-family: 'LTWaveAlt', 'Urbanist', sans-serif;
+  animation: textFadeIn 0.8s ease-out 2s forwards;
+}
+
+@keyframes textFadeIn {
+  to {
+    opacity: 0.8;
+  }
+}
+
+/* Efecto de salida completo del splash */
+.splashScreen.fade-out {
+  animation: splashFadeOut 0.8s ease-in-out forwards;
+}
+
+@keyframes splashFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
