@@ -16,8 +16,8 @@ export class Login implements OnInit {
   showPassword = signal<boolean>(false);
   loginForm: FormGroup;
   texts: TypedChar[][] = [
-    [...'¡Hola! Bienvenido a Portal Biz'].map(char => ({ char, class: 'text-white' })),
-    [...'Que la tecnología te acompañe'].map(char => ({ char, class: 'text-white' })),
+    [...'¡Hola! Bienvenido a Portal Biz'].map(char => ({ char, class: 'text-background' })),
+    [...'Que la tecnología te acompañe'].map(char => ({ char, class: 'text-background' })),
   ];
   typedChars = signal<TypedChar[]>([]);
   textIndex = 0;

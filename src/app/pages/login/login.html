@@ -198,15 +198,21 @@
             </div>
             <div class="hidden md:block absolute bottom-0 w-[10%]" data-aos="fade-up"
                 data-aos-anchor-placement="top-bottom" data-aos-once="true" data-aos-delay="0" data-aos-duration="1000">
-                <img class="w-full" src="assets/img/seven_saludando.png" alt="Robot saludando">
-                <div class="relative">
-                    <h1 class="absolute top-0 text-2xl font-bold text-center font-sans textGenerated">
-                        <ng-container *ngFor="let c of typedChars()">
-                            <span [ngClass]="c.class">{{ c.char }}</span>
-                        </ng-container>
-                        <span class="animate-pulse">|</span>
-                    </h1>
+                <!-- Speech bubble con texto -->
+                <div class="relative mb-2">
+                    <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-gray-200 relative">
+                        <h1 class="text-sm font-bold text-center font-sans textGenerated text-gray-800">
+                            <ng-container *ngFor="let c of typedChars()">
+                                <span [ngClass]="c.class">{{ c.char }}</span>
+                            </ng-container>
+                            <span class="animate-pulse">|</span>
+                        </h1>
+                        <!-- Flecha del globo apuntando hacia abajo -->
+                        <div class="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[8px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-white/90"></div>
+                    </div>
                 </div>
+                <!-- Imagen del robot -->
+                <img class="w-full" src="assets/img/seven_saludando.png" alt="Robot saludando">
             </div>
         </div>
 
