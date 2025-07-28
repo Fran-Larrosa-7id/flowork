@@ -52,14 +52,29 @@ export class Login implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     const video = document.querySelector('.videoRobot') as HTMLVideoElement;
-    const playVideo = () => {
-      video.play().catch(() => console.log('🛑 No se pudo reproducir'));
-    };
+    
+    if (video) {
+      // Intentar reproducir inmediatamente
+      video.play().then(() => {
+        console.log('✅ Video reproduciéndose automáticamente');
+      }).catch((error) => {
+        console.log('⚠️ No se pudo reproducir automáticamente:', error);
+        
+        // Fallback: reproducir en la primera interacción del usuario
+        const playVideo = () => {
+          video.play().then(() => {
+            console.log('✅ Video reproduciéndose tras interacción');
+          }).catch(() => {
+            console.log('🛑 Error al reproducir el video');
+          });
+        };
 
-    // Solo se ejecuta una vez al interactuar
-    ['click', 'touchstart', 'scroll'].forEach((event) =>
-      window.addEventListener(event, playVideo, { once: true })
-    );
+        // Solo se ejecuta una vez al interactuar
+        ['click', 'touchstart', 'scroll', 'keydown', 'keypress'].forEach((event) =>
+          window.addEventListener(event, playVideo, { once: true })
+        );
+      });
+    }
   }
 
   typeLoop(): void {
