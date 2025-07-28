@@ -14,7 +14,9 @@ module.exports = {
         hover: '#ff4757',       // Un rojo claro brillante para hover
       },
       fontFamily: {
-        sans: ['Urbanist', 'sans-serif'],
+        sans: ['LTWaveAlt', 'Urbanist', 'sans-serif'], // LTWaveAlt como fuente principal
+        wave: ['LTWaveAlt', 'sans-serif'], // Clase específica para usar la fuente: font-wave
+        urbanist: ['Urbanist', 'sans-serif'], // Mantener Urbanist disponible: font-urbanist
       },
     },
     screens: {

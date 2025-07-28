@@ -3,10 +3,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Definir fuente personalizada LTWaveAlt */
+@font-face {
+  font-family: 'LTWaveAlt';
+  src: url('./assets/font/LTWaveAlt-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* Mejora la carga de la fuente */
+}
+
 html,
 body {
   height: 100%;
-  font-family: 'Urbanist', sans-serif;
+  font-family: 'LTWaveAlt', 'Urbanist', sans-serif; /* LTWaveAlt como principal, Urbanist como fallback */
 }
 
 html {
