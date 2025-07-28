@@ -9,28 +9,31 @@
 
   <!-- ✅ Meta Description para SEO -->
   <meta name="description"
-    content="Portal Bliz  te permite cargar informes, descargar facturas, visualizar cuentas y recibir alertas automáticas en un entorno 100% digital." />
+    content="Portal Bliz te permite cargar informes, descargar facturas, visualizar cuentas y recibir alertas automáticas en un entorno 100% digital." />
 
   <!-- ✅ Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-  <!-- ✅ FontAwesome -->
+  <!-- ✅ FontAwesome Optimizado -->
   <link rel="preconnect" href="https://kit.fontawesome.com" crossorigin />
   <link rel="dns-prefetch" href="https://kit.fontawesome.com" />
+  <!-- 🔽 Alternativa si auto-hosteás: usar @font-face con font-display: swap -->
+
 </head>
 
 <body>
   <div class="relative splashScreen">
     <!-- Capa oscura encima del fondo para contraste -->
     <div class="absolute inset-0 bg-black/70"></div>
-    
+
     <!-- Contenedor con animaciones -->
     <div class="h-auto flex flex-col items-center justify-center p-4 z-50">
-      <!-- Logo con animación de entrada -->
+      <!-- Logo con optimización LCP -->
       <div class="logo-container">
-        <img src="assets/logo/portalbiz.svg" alt="Portal Biz Logo" class="splash-logo">
+        <img src="assets/logo/portalbiz.svg" alt="Portal Biz Logo" class="splash-logo" fetchpriority="high"
+          decoding="async" loading="eager">
       </div>
-      
+
       <!-- Puntos de carga animados -->
       <div class="loading-dots mt-8">
         <div class="dot dot-1"></div>
@@ -40,7 +43,9 @@
 
     </div>
   </div>
+
   <app-root></app-root>
+
   <!-- ✅ FontAwesome Script -->
   <script src="https://kit.fontawesome.com/cb0353dbc0.js" crossorigin="anonymous"></script>
 </body>
