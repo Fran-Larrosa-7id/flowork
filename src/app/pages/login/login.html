@@ -97,7 +97,7 @@
                 <h2 class="text-2xl xs:text-4xl  text-white mb-4">
                     Nuestro servicio
                 </h2>
-                <p class="text-white xs:text-lg">Conoce todas las opciones que te ofrecemos</p>
+                <p class="text-white xs:text-lg">Conocé todas las opciones que te ofrecemos</p>
                 <!-- <div class="w-24 h-1 bg-border mx-auto mt-4 rounded-full"></div> -->
             </div>
 
@@ -137,7 +137,7 @@
                             <h3 class="text-xs md:text-sm font-bold  transition-colors duration-300">
                                 Descarga de facturas</h3>
                             <p class="text-gray-600 text-xs md:text-sm mt-1  transition-colors duration-300">
-                                Accede y descarga todas tus facturas de forma rápida</p>
+                                Accedé y descargá todas tus facturas de forma rápida</p>
                         </div>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
                         </div>
                         <div>
                             <h3 class="text-sm font-bold  transition-colors duration-300">
-                                Carga de orden de pago y documentos relacionado</h3>
+                                Carga de orden de pago y documentos relacionados</h3>
                         </div>
                     </div>
                 </div>
@@ -196,7 +196,18 @@
                     </div>
                 </div>
             </div>
-
+            <div class="hidden md:block absolute bottom-0 w-[10%]" data-aos="fade-up"
+                data-aos-anchor-placement="top-bottom" data-aos-once="true" data-aos-delay="0" data-aos-duration="1000">
+                <img class="w-full" src="assets/img/seven_saludando.png" alt="Robot saludando">
+                <div class="relative">
+                    <h1 class="absolute top-0 text-2xl font-bold text-center font-sans textGenerated">
+                        <ng-container *ngFor="let c of typedChars()">
+                            <span [ngClass]="c.class">{{ c.char }}</span>
+                        </ng-container>
+                        <span class="animate-pulse">|</span>
+                    </h1>
+                </div>
+            </div>
         </div>
 
     </div>

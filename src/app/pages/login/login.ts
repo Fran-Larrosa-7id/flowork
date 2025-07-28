@@ -1,7 +1,10 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+interface TypedChar {
+  char: string;
+  class: string;
+}
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, CommonModule],
@@ -12,7 +15,14 @@ export class Login implements OnInit {
   isLoading = signal<boolean>(false);
   showPassword = signal<boolean>(false);
   loginForm: FormGroup;
-
+  texts: TypedChar[][] = [
+    [...'¡Hola! Bienvenido a Portal Biz'].map(char => ({ char, class: 'text-white' })),
+    [...'Que la tecnología te acompañe'].map(char => ({ char, class: 'text-white' })),
+  ];
+  typedChars = signal<TypedChar[]>([]);
+  textIndex = 0;
+  charIndex = 0;
+  isDeleting = false;
   constructor(
     private formBuilder: FormBuilder
   ) {
@@ -23,7 +33,7 @@ export class Login implements OnInit {
   }
 
   ngOnInit() {
-    // Lógica de inicialización aquí
+    this.typeLoop();
   }
 
   onSubmit() {
@@ -38,6 +48,34 @@ export class Login implements OnInit {
       // Marcar todos los campos como tocados para mostrar errores
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  typeLoop(): void {
+    const currentText = this.texts[this.textIndex];
+    const currentTypedChars = [...this.typedChars()];
+
+    if (this.isDeleting) {
+      currentTypedChars.pop();
+      this.charIndex--;
+    } else {
+      currentTypedChars.push(currentText[this.charIndex]);
+      this.charIndex++;
+    }
+
+    // Update the signal with the new array
+    this.typedChars.set(currentTypedChars);
+
+    let delay = this.isDeleting ? 30 : 80;
+
+    if (!this.isDeleting && this.charIndex === currentText.length) {
+      delay = 1500;
+      this.isDeleting = true;
+    } else if (this.isDeleting && this.charIndex === 0) {
+      this.isDeleting = false;
+      this.textIndex = (this.textIndex + 1) % this.texts.length;
+    }
+
+    setTimeout(() => this.typeLoop(), delay);
   }
 
   // Método para alternar la visibilidad de la contraseña
