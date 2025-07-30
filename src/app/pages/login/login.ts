@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 interface TypedChar {
   char: string;
   class: string;
@@ -23,6 +24,8 @@ export class Login implements OnInit, AfterViewInit {
   textIndex = 0;
   charIndex = 0;
   isDeleting = false;
+  private _router = inject(Router);
+
   constructor(
     private formBuilder: FormBuilder
   ) {
@@ -42,7 +45,10 @@ export class Login implements OnInit, AfterViewInit {
       const formData = this.loginForm.value;
       setTimeout(() => {
         this.isLoading.set(false);
-        console.log('Datos del formulario:', formData);
+        // Mock token generation
+        localStorage.setItem('token', 'mock-token');
+        // Redirect to dashboard
+        this._router.navigate(['/dashboard']);
       }, 1700);
     } else {
       // Marcar todos los campos como tocados para mostrar errores
@@ -50,7 +56,7 @@ export class Login implements OnInit, AfterViewInit {
     }
   }
 
-   ngAfterViewInit(): void {
+  ngAfterViewInit(): void {
     setTimeout(() => {
       const video = document.querySelector('.videoRobot') as HTMLVideoElement;
       if (video) {
