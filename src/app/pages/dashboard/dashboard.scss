@@ -1,3 +1,13 @@
 // .dashboardContainer {
 //   background-image: radial-gradient( circle farthest-corner at 6.3% 21.8%,  #0b000c 0%, var(--main-color) 200% );
 // }
+
+.dashboardContainer {
+    background-color: rgb(20 6 6);
+}
+
+.title{
+    >h1{
+        line-height: 3.25rem;
+    }
+}
