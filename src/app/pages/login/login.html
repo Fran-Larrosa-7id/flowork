@@ -2,10 +2,10 @@
 
     <!-- Section login left -->
     <div
-        class="relative loginContainer flex items-center justify-center p-12 min-h-screen xl:min-h-0 xl:h-auto xl:w-[70%]">
+        class="relative loginContainer flex items-start justify-center pt-[35dvh] pb-12 px-12 min-h-screen xl:min-h-0 xl:h-auto xl:w-[70%]">
         <div class="absolute inset-0 bg-black/50 "></div>
 
-        <img class="absolute top-[24%]   left-1/2 transform -translate-x-1/2 w-[60%] sm:w-[50%] md:w-[45%] lg:w-[40%] max-w-xs z-20"
+        <img class="absolute top-[24%] left-1/2 transform -translate-x-1/2 w-[60%] sm:w-[50%] md:w-[45%] lg:w-[40%] max-w-xs z-20"
             src="assets/logo/portalbiz.svg" alt="Portal Biz Logo" fetchpriority="high" decoding="async">
         <div class=" login rounded-lg relative z-10 p-8 bg-white/10 border border-gradient-to-r from-gray-200 via-blue-700 to-purple-500 shadow-lg backdrop-blur-md text-white"
             data-aos="zoom-in">
@@ -66,7 +66,7 @@
                     <div class="w-10 h-10 border-4 border-t-white border-main rounded-full animate-spin"></div>
                 </div>
                 } @else {
-                <button data-aos="zoom-in" type="submit" [disabled]="loginForm.invalid"
+                <button data-aos-anchor-placement="top-bottom" data-aos-once="true" data-aos-delay="0" data-aos-duration="1000" type="submit" [disabled]="loginForm.invalid"
                     class="w-full py-2 rounded-lg transition-colors duration-300 bg-main text-black font-semibold"
                     [class.bg-main]="loginForm.valid" [class.hover:bg-hover]="loginForm.valid"
                     [class.bg-gray-500]="loginForm.invalid" [class.cursor-not-allowed]="loginForm.invalid"
@@ -201,7 +201,8 @@
                 <div class="relative flex items-center">
                     <!-- Imagen del robot -->
                     <!-- <img class="w-full" src="assets/img/seven_saludando.png" alt="Robot saludando"> -->
-                    <video class="w-full videoRobot" autoplay muted loop playsinline webkit-playsinline preload="auto" defaultMuted>
+                    <video class="w-full videoRobot" autoplay muted loop playsinline webkit-playsinline preload="auto"
+                        defaultMuted>
                         <source src="assets/img/robot.webm" type="video/webm">
                         <!-- Fallback para navegadores que no soporten webm -->
                         <source src="assets/img/robot.mp4" type="video/mp4">
@@ -209,7 +210,8 @@
 
                     <!-- Speech bubble con texto a la derecha -->
                     <div class="absolute left-full ml-2 bottom-1/2 transform translate-y-1/2">
-                        <div class="bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-gray-200 relative whitespace-nowrap">
+                        <div
+                            class="bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg border border-gray-200 relative whitespace-nowrap">
                             <h1 class="text-sm font-bold font-sans textGenerated text-gray-800">
                                 <ng-container *ngFor="let c of typedChars()">
                                     <span [ngClass]="c.class">{{ c.char }}</span>
@@ -217,7 +219,9 @@
                                 <span class="animate-pulse">|</span>
                             </h1>
                             <!-- Flecha del globo apuntando hacia la izquierda (al robot) -->
-                            <div class="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-b-[8px] border-r-[8px] border-t-transparent border-b-transparent border-r-white/90"></div>
+                            <div
+                                class="absolute left-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[8px] border-b-[8px] border-r-[8px] border-t-transparent border-b-transparent border-r-white/90">
+                            </div>
                         </div>
                     </div>
                 </div>
