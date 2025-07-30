@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  height: 100vh;
+  position: relative;
+}
+
+aside {
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+}
+
+nav a.router-link-active {
+  background: rgba(255, 31, 67, 0.2);
+  border-color: #ff1f43;
+  color: white;
+}
+
+// Scrollbar personalizado
+nav {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 31, 67, 0.3);
+    border-radius: 2px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 31, 67, 0.5);
+  }
+}

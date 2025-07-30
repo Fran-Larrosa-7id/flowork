@@ -1,1 +1,123 @@
-<p>dashboard works!</p>
+<div class="p-8 min-h-screen bg-background">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-white mb-2">Dashboard</h1>
+      <p class="text-gray-400">Bienvenido de vuelta, aquí tienes un resumen de tu actividad</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="bg-gradient-to-br from-main/20 to-secondary/10 backdrop-blur-sm border border-border rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-400 text-sm">Total Usuarios</p>
+            <p class="text-2xl font-bold text-white">1,234</p>
+          </div>
+          <div class="bg-main/20 p-3 rounded-lg">
+            <i class="fas fa-users text-main text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-green-500/20 to-green-600/10 backdrop-blur-sm border border-border rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-400 text-sm">Ventas</p>
+            <p class="text-2xl font-bold text-white">$45,678</p>
+          </div>
+          <div class="bg-green-500/20 p-3 rounded-lg">
+            <i class="fas fa-dollar-sign text-green-400 text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-sm border border-border rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-400 text-sm">Proyectos</p>
+            <p class="text-2xl font-bold text-white">23</p>
+          </div>
+          <div class="bg-blue-500/20 p-3 rounded-lg">
+            <i class="fas fa-project-diagram text-blue-400 text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-sm border border-border rounded-xl p-6 hover:scale-105 transition-transform duration-300">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-gray-400 text-sm">Tareas</p>
+            <p class="text-2xl font-bold text-white">156</p>
+          </div>
+          <div class="bg-purple-500/20 p-3 rounded-lg">
+            <i class="fas fa-tasks text-purple-400 text-xl"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-border rounded-xl p-6">
+        <h3 class="text-xl font-semibold text-white mb-4">Actividad reciente</h3>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between py-3 border-b border-border/50">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-main rounded-full mr-3"></div>
+              <span class="text-gray-300">Nuevo usuario registrado</span>
+            </div>
+            <span class="text-gray-500 text-sm">Hace 5 min</span>
+          </div>
+          <div class="flex items-center justify-between py-3 border-b border-border/50">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-green-400 rounded-full mr-3"></div>
+              <span class="text-gray-300">Venta completada</span>
+            </div>
+            <span class="text-gray-500 text-sm">Hace 12 min</span>
+          </div>
+          <div class="flex items-center justify-between py-3">
+            <div class="flex items-center">
+              <div class="w-2 h-2 bg-blue-400 rounded-full mr-3"></div>
+              <span class="text-gray-300">Proyecto actualizado</span>
+            </div>
+            <span class="text-gray-500 text-sm">Hace 1 hora</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-border rounded-xl p-6">
+        <h3 class="text-xl font-semibold text-white mb-4">Estado del sistema</h3>
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-gray-300">CPU</span>
+            <div class="flex items-center">
+              <div class="w-32 bg-border rounded-full h-2 mr-3">
+                <div class="bg-gradient-to-r from-main to-secondary h-2 rounded-full" style="width: 65%"></div>
+              </div>
+              <span class="text-main text-sm font-medium">65%</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-gray-300">Memoria</span>
+            <div class="flex items-center">
+              <div class="w-32 bg-border rounded-full h-2 mr-3">
+                <div class="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full" style="width: 45%"></div>
+              </div>
+              <span class="text-green-400 text-sm font-medium">45%</span>
+            </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-gray-300">Almacenamiento</span>
+            <div class="flex items-center">
+              <div class="w-32 bg-border rounded-full h-2 mr-3">
+                <div class="bg-gradient-to-r from-blue-400 to-blue-500 h-2 rounded-full" style="width: 78%"></div>
+              </div>
+              <span class="text-blue-400 text-sm font-medium">78%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

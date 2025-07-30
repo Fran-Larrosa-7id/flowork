@@ -1,0 +1,55 @@
+<aside class="w-64 bg-gradient-to-b from-background to-background/95 border-r border-border shadow-2xl">
+  <div class="p-6">
+    <!-- Logo -->
+    <div class="flex items-center mb-8">
+      <div class="w-8 h-8 bg-gradient-to-r from-main to-secondary rounded-lg flex items-center justify-center mr-3">
+        <i class="fas fa-chart-line text-white text-sm"></i>
+      </div>
+      <h1 class="text-xl font-bold text-white">FloWork</h1>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="space-y-2">
+      <a routerLink="/dashboard" 
+         routerLinkActive="bg-main/20 border-main text-white" 
+         class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200 border border-transparent">
+        <i class="fas fa-tachometer-alt mr-3 text-main"></i>
+        Dashboard
+      </a>
+      
+      <a href="#" 
+         class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
+        <i class="fas fa-users mr-3 text-main"></i>
+        Usuarios
+      </a>
+      
+      <a href="#" 
+         class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
+        <i class="fas fa-chart-bar mr-3 text-main"></i>
+        Reportes
+      </a>
+      
+      <a href="#" 
+         class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
+        <i class="fas fa-cog mr-3 text-main"></i>
+        Configuración
+      </a>
+    </nav>
+  </div>
+
+  <!-- Bottom section -->
+  <div class="absolute bottom-0 left-0 right-0 p-6">
+    <div class="flex items-center p-3 bg-border/20 rounded-lg">
+      <div class="w-8 h-8 bg-gradient-to-r from-main to-secondary rounded-full flex items-center justify-center mr-3">
+        <i class="fas fa-user text-white text-xs"></i>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm font-medium text-white">Usuario</p>
+        <p class="text-xs text-gray-400">Administrador</p>
+      </div>
+      <button class="text-gray-400 hover:text-white transition-colors">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+  </div>
+</aside>
