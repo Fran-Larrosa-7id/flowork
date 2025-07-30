@@ -2,6 +2,7 @@ import { AfterViewInit, Component, inject, OnInit, signal } from '@angular/core'
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { RolService } from '../../services/rol';
 interface TypedChar {
   char: string;
   class: string;
@@ -25,7 +26,7 @@ export class Login implements OnInit, AfterViewInit {
   charIndex = 0;
   isDeleting = false;
   private _router = inject(Router);
-
+  private _rolService = inject(RolService);
   constructor(
     private formBuilder: FormBuilder
   ) {
@@ -47,6 +48,8 @@ export class Login implements OnInit, AfterViewInit {
         this.isLoading.set(false);
         // Mock token generation
         localStorage.setItem('token', 'mock-token');
+        // Mock role setting
+        this._rolService.setRole('comercial');
         // Redirect to dashboard
         this._router.navigate(['/dashboard']);
       }, 1700);
