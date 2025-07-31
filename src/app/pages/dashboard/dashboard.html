@@ -1,11 +1,12 @@
 <div class="p-8 min-h-screen bg-background dashboardContainer relative">
   <!-- Button open/close sidebar -->
-  <div class="absolute top-6 left-8 toggleBtn">
+  <div class="absolute top-6 left-[4.5rem] toggleBtn" [ngClass]="{'hidden': (utilService.deviceTypeComputed() === 'desktop' ||
+  (utilService.toggleSidebar() && utilService.deviceTypeComputed() !== 'desktop')), 'left-[1.5rem]': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')}">
     <button class=" text-white p-[6px] rounded-sm cursor-pointer" (click)="toggleSidebar()">
       <i class="fa-solid fa-bars"></i>
     </button>
   </div>
-  <div class="max-w-7xl mx-auto p-[3rem]" data-aos="zoom-in">
+  <div class="max-w-7xl mx-auto p-[3rem]" data-aos="zoom-in" [ngClass]="{'p-[0px]': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')}">
     <!-- Header -->
     <div class="mb-8">
       <div class="title">

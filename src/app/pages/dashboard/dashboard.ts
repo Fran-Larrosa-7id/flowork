@@ -89,6 +89,7 @@ export class Dashboard implements OnInit {
   public totalFacturas = 80;
   public deudaTotal = 120500;
   utilService = inject(UtilService);
+  
   ngOnInit() {
     Chart.register(...registerables);
   }
