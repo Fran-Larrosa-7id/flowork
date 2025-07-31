@@ -9,45 +9,119 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterOutlet, Sidebar, CommonModule],
   template: `
-    <div class="flex h-screen bg-background">
+    <div class="flex h-screen bg-background relative">
+      <!-- Backdrop overlay for mobile -->
+      <div class="backdrop-overlay" 
+           [ngClass]="{'backdrop-visible': toggleSidebar && isMobile, 'backdrop-hidden': !toggleSidebar || !isMobile}"
+           (click)="closeSidebarOnMobile()">
+      </div>
+      
       <!-- Sidebar -->
-      <div class="sidebar-container" [ngClass]="{'sidebar-open': toggleSidebar, 'sidebar-closed': !toggleSidebar}">
+      <div class="sidebar-container" 
+           [ngClass]="{
+             'sidebar-open': toggleSidebar, 
+             'sidebar-closed': !toggleSidebar,
+             'sidebar-mobile': isMobile,
+             'sidebar-desktop': !isMobile
+           }">
         <app-sidebar></app-sidebar>
       </div>
       
       <!-- Main content area -->
-      <div class="main-content">
+      <div class="main-content" [ngClass]="{'main-content-mobile': isMobile, 'main-content-desktop': !isMobile}">
         <router-outlet></router-outlet>
       </div>
     </div>
   `,
   styles: [`
+    /* Backdrop overlay for mobile */
+    .backdrop-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 40;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    
+    .backdrop-visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    
+    .backdrop-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Sidebar base styles */
     .sidebar-container {
       @apply bg-background text-white flex-shrink-0 border-r border-border/20;
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       overflow: hidden;
       box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+      height: 100vh;
     }
     
-    .sidebar-open {
+    /* Desktop sidebar behavior */
+    .sidebar-desktop {
+      position: relative;
+      z-index: 10;
+    }
+    
+    .sidebar-desktop.sidebar-open {
       transform: translateX(0);
       width: 256px;
       opacity: 1;
     }
     
-    .sidebar-closed {
+    .sidebar-desktop.sidebar-closed {
       transform: translateX(-100%);
       width: 0px;
       opacity: 0;
     }
     
-    .main-content {
-      @apply flex-1 overflow-auto;
-      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Mobile sidebar behavior (overlay) */
+    .sidebar-mobile {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 50;
+      width: 256px;
     }
-  
     
-    /* Backdrop blur effect when sidebar is closing */
+    .sidebar-mobile.sidebar-open {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    
+    .sidebar-mobile.sidebar-closed {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    
+    /* Main content styles */
+    .main-content {
+      @apply overflow-auto;
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      height: 100vh;
+    }
+    
+    /* Desktop main content */
+    .main-content-desktop {
+      @apply flex-1;
+    }
+    
+    /* Mobile main content (full width) */
+    .main-content-mobile {
+      width: 100%;
+      margin-left: 0;
+    }
+    
+    /* Backdrop blur effect when sidebar is open */
     .sidebar-container::before {
       content: '';
       position: absolute;
@@ -70,10 +144,14 @@ export class MainLayoutComponent {
   utilService = inject(UtilService);
   toggleSidebar: boolean = false;
   deviceType: string = '';
+  isMobile: boolean = false;
+
   // Detect changes in device type
   effectiveDeviceType = effect(() => {
     this.deviceType = this.utilService.deviceTypeComputed();
-    if (this.deviceType === 'mobile-s' || this.deviceType === 'mobile-m' || this.deviceType === 'mobile-l' || this.deviceType === 'mobile-xl') {
+    this.isMobile = this.deviceType === 'mobile-s' || this.deviceType === 'mobile-m' || this.deviceType === 'mobile-l' || this.deviceType === 'mobile-xl';
+
+    if (this.isMobile) {
       this.utilService.setToggleSidebar(false);
     }
   });
@@ -82,4 +160,11 @@ export class MainLayoutComponent {
   effectiveSidebarToggle = effect(() => {
     this.toggleSidebar = this.utilService.toggleSidebar();
   });
+
+  // Close sidebar when clicking on backdrop (mobile only)
+  closeSidebarOnMobile() {
+    if (this.isMobile) {
+      this.utilService.setToggleSidebar(false);
+    }
+  }
 }
