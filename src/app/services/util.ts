@@ -1,15 +1,29 @@
 import { computed, Injectable, signal } from '@angular/core';
 
-@Injectable()
+@Injectable(
+    {
+        providedIn: 'root'
+    }
+)
 export class UtilService {
 
   deviceTypeSingal = signal<string>('');
   deviceTypeComputed = computed<string>(() => this.deviceTypeSingal());
-  toogleSidebar = signal<boolean>(true);
+  toggleSidebar = signal<boolean>(true); // Corregido el typo
 
   constructor() {
     this.getDeviceType();
     window.addEventListener('resize', this.getDeviceType.bind(this));
+  }
+
+  // Método para cambiar el estado del sidebar
+  setToggleSidebar(state: boolean) {
+    this.toggleSidebar.set(state);
+  }
+
+  // Método para alternar el sidebar
+  toggleSidebarState() {
+    this.toggleSidebar.set(!this.toggleSidebar());
   }
 
   getDeviceType() {

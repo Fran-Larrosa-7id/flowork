@@ -11,31 +11,31 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="flex h-screen bg-background">
       <!-- Sidebar -->
-       @if(this.utilService.deviceTypeComputed() === 'desktop') {
-         <app-sidebar></app-sidebar>
+       @if (toggleSidebar) {
+        <div class="w-64 bg-sidebar text-white flex-shrink-0">
+          <app-sidebar></app-sidebar>
+        </div>
        }
       
       <!-- Main content area -->
-      <div class="flex-1 ml-64 overflow-auto" [ngClass]="{'ml-0': !utilService.toogleSidebar()}">
+      <div class="flex-1 overflow-auto">
         <router-outlet></router-outlet>
       </div>
     </div>
   `,
-  styles: [],
-  providers: [
-    UtilService
-  ]
+  styles: []
 })
-export class MainLayoutComponent { 
+export class MainLayoutComponent {
   utilService = inject(UtilService);
-  
+  toggleSidebar: boolean = false;
+  deviceType: string = '';
   // Detect changes in device type
   effectiveDeviceType = effect(() => {
-    console.log('Device type changed:', this.utilService.deviceTypeComputed());
+    this.deviceType = this.utilService.deviceTypeComputed();
   });
 
   // Detect changes in sidebar toggle state
   effectiveSidebarToggle = effect(() => {
-    console.log('Sidebar toggle state changed:', this.utilService.toogleSidebar());
+    this.toggleSidebar = this.utilService.toggleSidebar();
   });
 }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
@@ -9,7 +9,6 @@ import { UtilService } from '../../services/util';
   imports: [CommonModule, BaseChartDirective],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
-  providers: [UtilService]
 })
 export class Dashboard implements OnInit {
 
@@ -95,6 +94,6 @@ export class Dashboard implements OnInit {
 
   // Método para alternar la visibilidad del sidebar
   toggleSidebar() {
-    this.utilService.toogleSidebar.set(false);
+    this.utilService.toggleSidebarState();
   }
 }
