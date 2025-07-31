@@ -16,38 +16,38 @@
                     }
                 </p>
             </div>
-            <!-- TODO: Se comenta temporalmente -->
-            <!-- <button matTooltip="Cambiar rol" [matTooltipPosition]="'above'"
-                class="text-gray-400 hover:text-white transition-colors">
-                <i class="fa-solid fa-people-arrows"></i>
-            </button> -->
         </div>
 
         <!-- Navigation -->
         <nav class="space-y-2">
+            <!-- Dashboard -->
             <a routerLink="/dashboard" routerLinkActive="bg-main/20 border-main text-white"
                 class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200 border border-transparent">
                 <i class="fas fa-tachometer-alt mr-3 text-main"></i>
                 Dashboard
             </a>
+            <!-- Gestión de comprobantes -->
             <a routerLink="/users" routerLinkActive="bg-main/20 border-main text-white"
                 class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
                 <i class="fa-solid fa-folder-open text-main mr-3"></i>
                 Gestión de comprobantes
             </a>
 
+            <!-- Clientes -->
             <a routerLink="/reports" routerLinkActive="bg-main/20 border-main text-white"
                 class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
                 <i class="fas fa-chart-bar mr-3 text-main"></i>
                 Clientes
             </a>
 
+            <!-- Configuración -->
             <a routerLink="/settings" routerLinkActive="bg-main/20 border-main text-white"
                 class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
                 <i class="fas fa-cog mr-3 text-main"></i>
                 Configuración
             </a>
 
+            <!-- Cerrar sesión -->
             <a class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200 cursor-pointer"
                 (click)="logout()">
                 <i class="fas fa-sign-out-alt mr-3 text-main"></i>

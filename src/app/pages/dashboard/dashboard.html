@@ -1,5 +1,11 @@
-<div class="p-8 min-h-screen bg-background dashboardContainer">
-  <div class="max-w-7xl mx-auto " data-aos="zoom-in">
+<div class="p-8 min-h-screen bg-background dashboardContainer relative">
+  <!-- Button open/close sidebar -->
+  <div class="absolute top-6 left-8 toggleBtn">
+    <button class=" text-white p-[6px] rounded-sm cursor-pointer" (click)="toggleSidebar()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+  <div class="max-w-7xl mx-auto p-[3rem]" data-aos="zoom-in">
     <!-- Header -->
     <div class="mb-8">
       <div class="title">
@@ -8,69 +14,18 @@
       </div>
     </div>
 
-    <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-      <div
-        class="bg-gradient-to-br from-main/20 to-secondary/10 backdrop-blur-sm border border-border rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-gray-400 text-sm">Total Usuarios</p>
-            <p class="text-2xl font-bold text-white">1,234</p>
-          </div>
-          <div class="bg-main/20 p-3 rounded-lg">
-            <i class="fas fa-users text-main text-xl"></i>
-          </div>
-        </div>
-      </div>
-      <div
-        class="bg-gradient-to-br from-main/20 to-secondary/10 backdrop-blur-sm border border-border rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-gray-400 text-sm">Total Usuarios</p>
-            <p class="text-2xl font-bold text-white">1,234</p>
-          </div>
-          <div class="bg-main/20 p-3 rounded-lg">
-            <i class="fas fa-users text-main text-xl"></i>
-          </div>
-        </div>
-      </div>
-      <div
-        class="bg-gradient-to-br from-main/20 to-secondary/10 backdrop-blur-sm border border-border rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-gray-400 text-sm">Total Usuarios</p>
-            <p class="text-2xl font-bold text-white">1,234</p>
-          </div>
-          <div class="bg-main/20 p-3 rounded-lg">
-            <i class="fas fa-users text-main text-xl"></i>
-          </div>
-        </div>
-      </div>
-      <div
-        class="bg-gradient-to-br from-main/20 to-secondary/10 backdrop-blur-sm border border-border rounded-xl p-6 hover:scale-105 transition-transform duration-300">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-gray-400 text-sm">Total Usuarios</p>
-            <p class="text-2xl font-bold text-white">1,234</p>
-          </div>
-          <div class="bg-main/20 p-3 rounded-lg">
-            <i class="fas fa-users text-main text-xl"></i>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Charts Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      
+
       <!-- Card 1: Clientes -->
-      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]">
+      <div
+        class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]">
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center gap-3">
             <i class="fas fa-users text-white text-xl"></i>
             <h3 class="text-xl font-semibold text-white">Clientes</h3>
           </div>
-          <i class="fas fa-chevron-down text-white/60"></i>
         </div>
         <div class="flex items-center justify-between">
           <div class="flex flex-col gap-3">
@@ -85,23 +40,20 @@
             <p class="text-white/60 text-lg mt-4">TOTAL: {{ totalClientes }} Clientes</p>
           </div>
           <div class="w-40 h-40 flex-shrink-0">
-            <canvas baseChart
-                    [type]="clientesChartType"
-                    [data]="clientesChartData"
-                    [options]="clientesChartOptions">
+            <canvas baseChart [type]="clientesChartType" [data]="clientesChartData" [options]="clientesChartOptions">
             </canvas>
           </div>
         </div>
       </div>
 
       <!-- Card 2: Facturas pagas del período -->
-      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]">
+      <div
+        class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]">
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center gap-3">
             <i class="fas fa-file-invoice text-white text-xl"></i>
             <h3 class="text-xl font-semibold text-white">Facturas pagas del período</h3>
           </div>
-          <i class="fas fa-chevron-down text-white/60"></i>
         </div>
         <div class="flex items-center justify-between">
           <div class="flex flex-col gap-3">
@@ -116,23 +68,20 @@
             <p class="text-white/60 text-lg mt-4">TOTAL: {{ totalFacturas }} Facturas</p>
           </div>
           <div class="w-40 h-40 flex-shrink-0">
-            <canvas baseChart
-                    [type]="facturasChartType"
-                    [data]="facturasChartData"
-                    [options]="facturasChartOptions">
+            <canvas baseChart [type]="facturasChartType" [data]="facturasChartData" [options]="facturasChartOptions">
             </canvas>
           </div>
         </div>
       </div>
 
       <!-- Card 3: Deuda total -->
-      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px] flex flex-col">
+      <div
+        class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px] flex flex-col">
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center gap-3">
             <i class="fas fa-dollar-sign text-white text-xl"></i>
             <h3 class="text-xl font-semibold text-white">Deuda total</h3>
           </div>
-          <i class="fas fa-chevron-down text-white/60"></i>
         </div>
         <div class="flex items-center justify-center flex-1">
           <h2 class="text-6xl font-bold text-white">
@@ -142,25 +91,22 @@
       </div>
 
       <!-- Card 4: Ingresos 2025 -->
-      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]">
+      <div
+        class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]">
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center gap-3">
             <i class="fas fa-chart-bar text-white text-xl"></i>
             <h3 class="text-xl font-semibold text-white">Ingresos 2025</h3>
           </div>
-          <i class="fas fa-chevron-down text-white/60"></i>
         </div>
         <div class="flex items-center justify-center flex-1">
           <div class="w-full h-32">
-            <canvas baseChart
-                    [type]="ingresosChartType"
-                    [data]="ingresosChartData"
-                    [options]="ingresosChartOptions">
+            <canvas baseChart [type]="ingresosChartType" [data]="ingresosChartData" [options]="ingresosChartOptions">
             </canvas>
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>

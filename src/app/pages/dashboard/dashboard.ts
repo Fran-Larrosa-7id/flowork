@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
+import { UtilService } from '../../services/util';
 
 @Component({
   selector: 'app-dashboard',
   imports: [CommonModule, BaseChartDirective],
   templateUrl: './dashboard.html',
-  styleUrl: './dashboard.scss'
+  styleUrl: './dashboard.scss',
+  providers: [UtilService]
 })
 export class Dashboard implements OnInit {
 
@@ -17,7 +19,7 @@ export class Dashboard implements OnInit {
     labels: ['Situación correcta', 'Deudores'],
     datasets: [{
       data: [60, 40],
-      backgroundColor: ['#ff4757', '#8f001c'], // hover y border de tu paleta
+      backgroundColor: ['#ff4757', '#8f001c'], // hover y border de la paleta
       borderWidth: 0
     }]
   };
@@ -38,7 +40,7 @@ export class Dashboard implements OnInit {
     labels: ['Paga', 'Pendiente'],
     datasets: [{
       data: [70, 30],
-      backgroundColor: ['#ff4757', '#8f001c'], // main y border de tu paleta
+      backgroundColor: ['#ff1f43', '#8f001c'], // main y border de la paleta
       borderWidth: 0
     }]
   };
@@ -56,10 +58,10 @@ export class Dashboard implements OnInit {
   // Configuración para el gráfico de Ingresos (Bar)
   public ingresosChartType = 'bar' as const;
   public ingresosChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
     datasets: [{
       data: [900, 390, 500, 180, 500, 900, 400, 450, 300, 600, 700, 1200],
-      backgroundColor: ['#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757'], // Gradiente con tu paleta
+      backgroundColor: ['#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757', '#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757'], // Usando paleta completa
       borderRadius: 2,
       borderSkipped: false
     }]
@@ -86,8 +88,13 @@ export class Dashboard implements OnInit {
   public totalClientes = 200;
   public totalFacturas = 80;
   public deudaTotal = 120500;
-
+  utilService = inject(UtilService);
   ngOnInit() {
     Chart.register(...registerables);
+  }
+
+  // Método para alternar la visibilidad del sidebar
+  toggleSidebar() {
+    this.utilService.toogleSidebar.set(false);
   }
 }
