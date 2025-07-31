@@ -57,7 +57,8 @@ export class Dashboard implements OnInit {
   // Configuración para el gráfico de Ingresos (Bar)
   public ingresosChartType = 'bar' as const;
   public ingresosChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul'],
+    // TODO: Mobile muestra solo 5 meses
+    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'],
     datasets: [{
       data: [900, 390, 500, 180, 500, 900, 400, 450, 300, 600, 700, 1200],
       backgroundColor: ['#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757', '#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757'], // Usando paleta completa
