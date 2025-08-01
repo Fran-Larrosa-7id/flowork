@@ -20,6 +20,12 @@
     padding: 0 !important;
 }
 
+.ultra-small-padding {
+    padding: 1rem !important;
+    max-width: 100vw !important;
+    margin: 0 auto !important;
+}
+
 .isMobile{
     left: 1.5rem !important;
 }
@@ -33,6 +39,9 @@
     min-height: 200px !important;
     padding: 1rem !important;
     margin-bottom: 1rem;
+    min-width: 0 !important; /* Permitir que se achique más */
+    width: 100% !important;
+    box-sizing: border-box;
 }
 
 .mobile-card-debt {
@@ -42,26 +51,34 @@
 .mobile-title {
     font-size: 1rem !important;
     line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .mobile-content {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 1rem;
+    width: 100%;
 }
 
 .mobile-chart {
     width: 80px !important;
     height: 80px !important;
     align-self: center;
+    flex-shrink: 0;
 }
 
 .mobile-bar-chart {
     height: 80px !important;
+    width: 100% !important;
+    min-width: 0 !important;
 }
 
 .mobile-text {
     font-size: 0.875rem !important;
+    line-height: 1.2;
 }
 
 .mobile-total {
@@ -72,6 +89,7 @@
 .mobile-dot {
     width: 8px !important;
     height: 8px !important;
+    flex-shrink: 0;
 }
 
 .mobile-debt-amount {
@@ -85,5 +103,85 @@
     .grid {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
+    }
+}
+
+/* Ajustes para pantallas ultra pequeñas (menos de 360px) */
+@media (max-width: 359px) {
+    .mobile-card {
+        padding: 0.75rem !important;
+        min-height: 180px !important;
+        margin-bottom: 0.75rem;
+    }
+    
+    .mobile-card-debt {
+        min-height: 140px !important;
+    }
+    
+    /* Títulos más cortos para pantallas ultra pequeñas */
+    .mobile-title {
+        font-size: 0.875rem !important;
+        max-width: 200px;
+        word-wrap: break-word;
+    }
+    
+    /* Flex items más flexibles */
+    .flex {
+        flex-wrap: wrap !important;
+    }
+    
+    .flex-shrink-0 {
+        flex-shrink: 1 !important;
+    }
+    
+    .mobile-text {
+        font-size: 0.75rem !important;
+    }
+    
+    .mobile-total {
+        font-size: 0.675rem !important;
+    }
+    
+    .mobile-debt-amount {
+        font-size: 2rem !important;
+    }
+    
+    .mobile-chart {
+        width: 60px !important;
+        height: 60px !important;
+    }
+    
+    .mobile-bar-chart {
+        height: 60px !important;
+    }
+    
+    .mobile-dot {
+        width: 6px !important;
+        height: 6px !important;
+    }
+    
+    /* Contenedor principal más compacto */
+    .dashboardContainer {
+        padding: 0.5rem !important;
+    }
+    
+    .isMobileContainer {
+        padding-top: 2rem !important;
+    }
+    
+    /* Grid más compacto */
+    .grid {
+        gap: 0.75rem !important;
+    }
+    
+    /* Título principal más pequeño */
+    .title > h1 {
+        font-size: 1.75rem !important;
+        line-height: 2rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .title > p {
+        font-size: 0.75rem !important;
     }
 }

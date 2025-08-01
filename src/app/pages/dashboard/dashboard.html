@@ -6,7 +6,11 @@
       <i class="fa-solid fa-bars"></i>
     </button>
   </div>
-  <div class="max-w-7xl mx-auto p-[3rem]" data-aos="zoom-in" [ngClass]="{'noPadding': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')}">
+  <div class="max-w-7xl mx-auto p-[3rem]" data-aos="zoom-in" 
+       [ngClass]="{
+         'noPadding': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet'),
+         'ultra-small-padding': isMobile
+       }">>
     <!-- Header -->
     <div class="mb-8">
       <div class="title">
@@ -53,7 +57,7 @@
         <div class="flex items-center justify-between mb-6">
           <div class="flex items-center gap-3">
             <i class="fas fa-file-invoice text-white text-xl"></i>
-            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Facturas pagas del período</h3>
+            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Facturas pagas</h3>
           </div>
         </div>
         <div class="flex items-center justify-between" [ngClass]="{'mobile-content': isMobile}">
