@@ -27,3 +27,63 @@
 .isMobileContainer{
     padding-top: 3rem !important;
 }
+
+/* Estilos responsive para mobile */
+.mobile-card {
+    min-height: 200px !important;
+    padding: 1rem !important;
+    margin-bottom: 1rem;
+}
+
+.mobile-card-debt {
+    min-height: 160px !important;
+}
+
+.mobile-title {
+    font-size: 1rem !important;
+    line-height: 1.2;
+}
+
+.mobile-content {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem;
+}
+
+.mobile-chart {
+    width: 80px !important;
+    height: 80px !important;
+    align-self: center;
+}
+
+.mobile-bar-chart {
+    height: 80px !important;
+}
+
+.mobile-text {
+    font-size: 0.875rem !important;
+}
+
+.mobile-total {
+    font-size: 0.75rem !important;
+    margin-top: 0.5rem !important;
+}
+
+.mobile-dot {
+    width: 8px !important;
+    height: 8px !important;
+}
+
+.mobile-debt-amount {
+    font-size: 2.5rem !important;
+    text-align: center;
+    line-height: 1.1;
+}
+
+/* Ajustes del grid en mobile */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}

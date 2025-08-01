@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
@@ -57,11 +57,10 @@ export class Dashboard implements OnInit {
   // Configuración para el gráfico de Ingresos (Bar)
   public ingresosChartType = 'bar' as const;
   public ingresosChartData: ChartConfiguration<'bar'>['data'] = {
-    // TODO: Mobile muestra solo 5 meses
-    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'],
+    labels: this.getIngresosLabels(),
     datasets: [{
-      data: [900, 390, 500, 180, 500, 900, 400, 450, 300, 600, 700, 1200],
-      backgroundColor: ['#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757', '#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757'], // Usando paleta completa
+      data: this.getIngresosData(),
+      backgroundColor: this.getIngresosColors(),
       borderRadius: 2,
       borderSkipped: false
     }]
@@ -89,9 +88,51 @@ export class Dashboard implements OnInit {
   public totalFacturas = 80;
   public deudaTotal = 120500;
   utilService = inject(UtilService);
-  
+
+  // Propiedades para responsive
+  public isMobile = false;
+  public deviceType = '';
+
+  // Datos completos
+  private labelsCompletos = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  private dataCompleta = [900, 390, 500, 180, 500, 900, 400, 450, 300, 600, 700, 1200];
+  private coloresCompletos = ['#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757', '#8f001c', '#8f001c', '#ff1f43', '#8f001c', '#8f001c', '#ff4757'];
+
+  // Effect para detectar cambios de dispositivo
+  deviceEffect = effect(() => {
+    this.deviceType = this.utilService.deviceTypeComputed();
+    this.isMobile = this.deviceType.includes('mobile');
+    this.updateChartData();
+  });
+
   ngOnInit() {
     Chart.register(...registerables);
+  }
+
+  // Métodos helper para datos responsive
+  getIngresosLabels(): string[] {
+    return this.isMobile ? this.labelsCompletos.slice(-6) : this.labelsCompletos;
+  }
+
+  getIngresosData(): number[] {
+    return this.isMobile ? this.dataCompleta.slice(-6) : this.dataCompleta;
+  }
+
+  getIngresosColors(): string[] {
+    return this.isMobile ? this.coloresCompletos.slice(-6) : this.coloresCompletos;
+  }
+
+  // Actualizar datos del gráfico cuando cambia el dispositivo
+  updateChartData() {
+    this.ingresosChartData = {
+      labels: this.getIngresosLabels(),
+      datasets: [{
+        data: this.getIngresosData(),
+        backgroundColor: this.getIngresosColors(),
+        borderRadius: 2,
+        borderSkipped: false
+      }]
+    };
   }
 
   // Método para alternar la visibilidad del sidebar
