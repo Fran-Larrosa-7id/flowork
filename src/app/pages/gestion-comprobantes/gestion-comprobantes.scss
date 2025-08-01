@@ -203,6 +203,189 @@ button {
     }
 }
 
+// Estilos específicos para las cards mobile
+.mobile-cards-container {
+    padding: 1rem !important;
+    padding-bottom: 6rem !important; // Espacio extra para el botón flotante
+    
+    .mobile-card {
+        background: rgba(31, 41, 55, 0.4) !important;
+        border: 1px solid rgba(75, 85, 99, 0.3) !important;
+        backdrop-filter: blur(8px);
+        margin-bottom: 1.5rem !important;
+        padding: 1.25rem !important;
+        border-radius: 1rem !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+        
+        &:hover {
+            background: rgba(31, 41, 55, 0.6) !important;
+            border-color: rgba(255, 31, 67, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .mobile-card-header {
+            margin-bottom: 1.25rem !important;
+            gap: 1rem !important;
+            
+            .mobile-card-info {
+                flex: 1;
+                min-width: 0;
+                
+                .mobile-card-title {
+                    font-size: 1.25rem !important;
+                    font-weight: 700 !important;
+                    margin-bottom: 0.5rem !important;
+                    color: white !important;
+                    line-height: 1.3 !important;
+                }
+                
+                .mobile-card-amount {
+                    font-size: 1.125rem !important;
+                    font-weight: 600 !important;
+                    color: #e5e7eb !important;
+                    margin-bottom: 0.75rem !important;
+                    line-height: 1.2 !important;
+                }
+                
+                .mobile-card-detail {
+                    font-size: 0.875rem !important;
+                    color: #a1a1aa !important;
+                    line-height: 1.4 !important;
+                    margin-top: 0.375rem !important;
+                    padding: 0.25rem 0 !important;
+                }
+            }
+            
+            .mobile-card-badge {
+                padding: 0.5rem 1rem !important;
+                font-size: 0.8rem !important;
+                font-weight: 700 !important;
+                border-radius: 9999px !important;
+                white-space: nowrap;
+                flex-shrink: 0;
+                margin-left: 1rem;
+                text-transform: uppercase;
+                letter-spacing: 0.025em;
+            }
+        }
+        
+        .mobile-card-footer {
+            align-items: center !important;
+            gap: 1rem !important;
+            padding-top: 1rem !important;
+            border-top: 1px solid rgba(75, 85, 99, 0.2) !important;
+            
+            .mobile-card-files {
+                font-size: 0.9rem !important;
+                color: #a1a1aa !important;
+                flex: 1;
+                font-weight: 500;
+                
+                span {
+                    background: rgba(55, 65, 81, 0.8) !important;
+                    padding: 0.375rem 0.75rem !important;
+                    border-radius: 0.5rem !important;
+                    font-size: 0.8rem !important;
+                    font-weight: 600 !important;
+                    margin-left: 0.5rem !important;
+                    color: #f3f4f6 !important;
+                }
+            }
+            
+            .mobile-card-actions {
+                gap: 0.75rem !important;
+                flex-shrink: 0;
+                
+                .mobile-action-btn {
+                    padding: 0.75rem !important;
+                    min-width: 2.5rem !important;
+                    height: 2.5rem !important;
+                    border-radius: 0.5rem !important;
+                    background: rgba(55, 65, 81, 0.8) !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: center !important;
+                    transition: all 0.2s ease !important;
+                    border: 1px solid rgba(75, 85, 99, 0.3) !important;
+                    
+                    &:hover {
+                        background: rgba(75, 85, 99, 0.9) !important;
+                        border-color: rgba(255, 31, 67, 0.4) !important;
+                        transform: scale(1.05);
+                    }
+                    
+                    i {
+                        font-size: 1rem !important;
+                        color: #f3f4f6 !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Ajustes adicionales para pantallas muy pequeñas
+@media (max-width: 479px) {
+    .mobile-cards-container {
+        padding: 0.75rem !important;
+        
+        .mobile-card {
+            padding: 1rem !important;
+            margin-bottom: 1rem !important;
+            border-radius: 0.75rem !important;
+            
+            .mobile-card-header {
+                margin-bottom: 1rem !important;
+                
+                .mobile-card-info {
+                    .mobile-card-title {
+                        font-size: 1.125rem !important;
+                    }
+                    
+                    .mobile-card-amount {
+                        font-size: 1rem !important;
+                        margin-bottom: 0.5rem !important;
+                    }
+                    
+                    .mobile-card-detail {
+                        font-size: 0.8rem !important;
+                        margin-top: 0.25rem !important;
+                    }
+                }
+                
+                .mobile-card-badge {
+                    padding: 0.375rem 0.75rem !important;
+                    font-size: 0.75rem !important;
+                    margin-left: 0.75rem;
+                }
+            }
+            
+            .mobile-card-footer {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 0.75rem !important;
+                
+                .mobile-card-files {
+                    text-align: center !important;
+                    font-size: 0.875rem !important;
+                }
+                
+                .mobile-card-actions {
+                    justify-content: center !important;
+                    gap: 1rem !important;
+                    
+                    .mobile-action-btn {
+                        flex: 1 !important;
+                        max-width: 4rem !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 // Responsive breakpoints
 @media (max-width: 768px) {
     .flex-wrap {
@@ -237,6 +420,186 @@ button {
     
     .comprobantesContainer {
         padding: 0.5rem !important;
+    }
+}
+
+// Mejoras específicas para mobile (<768px)
+@media (max-width: 767px) {
+    .comprobantesContainer {
+        padding: 1rem !important;
+        
+        .max-w-7xl {
+            padding: 0 !important;
+            max-width: 100% !important;
+        }
+        
+        // Header ajustado para mobile
+        .title {
+            margin-bottom: 1.5rem !important;
+            text-align: center;
+            
+            h1 {
+                font-size: 1.75rem !important;
+                line-height: 2.25rem !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            p {
+                font-size: 0.875rem !important;
+                line-height: 1.25rem !important;
+            }
+        }
+        
+        // Filtros mejorados para mobile
+        .mobile-filters {
+            margin-bottom: 1rem !important;
+            
+            .filter-dropdown {
+                margin-bottom: 0.5rem;
+                
+                select, input {
+                    padding: 0.75rem !important;
+                    font-size: 0.875rem !important;
+                    border-radius: 0.5rem !important;
+                }
+            }
+        }
+        
+        // Botón de agregar posicionado mejor
+        .mobile-add-btn {
+            position: fixed !important;
+            bottom: 1.5rem !important;
+            right: 1.5rem !important;
+            z-index: 50 !important;
+            width: 56px !important;
+            height: 56px !important;
+            border-radius: 50% !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        // Cards de comprobantes mejoradas
+        .bg-gray-800\/30 {
+            margin: 0 0 1rem 0 !important;
+            padding: 1rem !important;
+            border-radius: 0.75rem !important;
+            
+            // Header de la card
+            .flex.justify-between.items-start {
+                margin-bottom: 1rem !important;
+                
+                div:first-child {
+                    h3 {
+                        font-size: 1.125rem !important;
+                        font-weight: 600 !important;
+                        margin-bottom: 0.25rem !important;
+                    }
+                    
+                    p {
+                        font-size: 0.875rem !important;
+                        margin-bottom: 0.25rem !important;
+                        
+                        &.text-gray-500 {
+                            font-size: 0.75rem !important;
+                        }
+                    }
+                }
+                
+                // Badge de estado
+                span.px-2 {
+                    padding: 0.375rem 0.75rem !important;
+                    font-size: 0.75rem !important;
+                    font-weight: 600 !important;
+                    border-radius: 9999px !important;
+                }
+            }
+            
+            // Footer de la card (archivos y botones)
+            .flex.justify-between.items-center {
+                align-items: center !important;
+                
+                span.text-gray-400 {
+                    font-size: 0.875rem !important;
+                    
+                    span.bg-gray-700 {
+                        padding: 0.25rem 0.5rem !important;
+                        font-size: 0.75rem !important;
+                        margin-left: 0.25rem !important;
+                    }
+                }
+                
+                // Botones de acción
+                .flex.gap-2 {
+                    gap: 0.5rem !important;
+                    
+                    button {
+                        padding: 0.5rem !important;
+                        font-size: 0.875rem !important;
+                        border-radius: 0.375rem !important;
+                        min-width: 2rem !important;
+                        height: 2rem !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                }
+            }
+        }
+        
+        // Container de la tabla/cards
+        .mobile-table-container {
+            margin: 0 !important;
+            padding: 0 !important;
+            
+            .p-4 {
+                padding: 0 !important;
+            }
+        }
+    }
+}
+
+// Mejoras específicas para pantallas muy pequeñas (<480px)
+@media (max-width: 479px) {
+    .comprobantesContainer {
+        padding: 0.75rem !important;
+        
+        .title {
+            h1 {
+                font-size: 1.5rem !important;
+                line-height: 2rem !important;
+            }
+        }
+        
+        .mobile-add-btn {
+            bottom: 1rem !important;
+            right: 1rem !important;
+            width: 48px !important;
+            height: 48px !important;
+        }
+        
+        .bg-gray-800\/30 {
+            padding: 0.75rem !important;
+            margin-bottom: 0.75rem !important;
+            
+            .flex.justify-between.items-start {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 0.5rem !important;
+                
+                span.px-2 {
+                    align-self: flex-end !important;
+                }
+            }
+            
+            .flex.justify-between.items-center {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 0.75rem !important;
+                
+                .flex.gap-2 {
+                    justify-content: center !important;
+                }
+            }
+        }
     }
 }
 
@@ -378,4 +741,239 @@ button:disabled {
             }
         }
     }
+}
+
+.mobile-container {
+    padding: 0.5rem !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+}
+
+// Estilos para modal en mobile
+.mobile-modal {
+    max-width: calc(100vw - 2rem) !important;
+    margin: 1rem !important;
+    padding: 1rem !important;
+    max-height: calc(100vh - 4rem) !important;
+    overflow-y: auto;
+    
+    // Header del modal
+    .flex.items-center.justify-between {
+        margin-bottom: 1rem !important;
+        
+        h2 {
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+        }
+        
+        button {
+            padding: 0.25rem !important;
+            
+            i {
+                font-size: 1.25rem !important;
+            }
+        }
+    }
+    
+    // Campos del formulario
+    .space-y-4 {
+        gap: 0.75rem !important;
+        
+        > div {
+            margin-bottom: 0.75rem !important;
+            
+            label {
+                font-size: 0.875rem !important;
+                margin-bottom: 0.375rem !important;
+            }
+            
+            select, input {
+                padding: 0.75rem !important;
+                font-size: 0.875rem !important;
+                border-radius: 0.5rem !important;
+            }
+        }
+    }
+    
+    // Sección de archivos
+    .archivos-container {
+        .archivos-scroll {
+            max-height: 8rem !important; // Reducir altura en mobile
+        }
+        
+        .archivo-item {
+            padding: 0.5rem !important;
+            
+            .archivo-info {
+                .archivo-nombre {
+                    max-width: 120px !important;
+                    font-size: 0.8rem !important;
+                }
+            }
+            
+            button {
+                padding: 0.375rem !important;
+                
+                i {
+                    font-size: 0.75rem !important;
+                }
+            }
+        }
+        
+        .flex.items-center.gap-2 {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 0.5rem !important;
+            
+            button {
+                text-align: center !important;
+                font-size: 0.75rem !important;
+                padding: 0.375rem !important;
+            }
+        }
+    }
+    
+    // Botones del modal
+    .flex.gap-3.mt-6 {
+        margin-top: 1rem !important;
+        gap: 0.75rem !important;
+        
+        button {
+            padding: 0.75rem 1rem !important;
+            font-size: 0.875rem !important;
+            border-radius: 0.5rem !important;
+            flex: 1 !important;
+        }
+    }
+    
+    // Área de drag and drop
+    .border-dashed {
+        padding: 1rem !important;
+        
+        i {
+            font-size: 1.5rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        p {
+            font-size: 0.75rem !important;
+        }
+    }
+}
+
+// Estilos optimizados para mobile con máxima especificidad
+.mobile-optimized {
+    padding: 1rem !important;
+    padding-bottom: 6rem !important;
+}
+
+.mobile-card-optimized {
+    padding: 1.25rem !important;
+    margin-bottom: 1.5rem !important;
+    border-radius: 1rem !important;
+    background: rgba(31, 41, 55, 0.4) !important;
+    border: 1px solid rgba(75, 85, 99, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    backdrop-filter: blur(8px) !important;
+    transition: all 0.2s ease !important;
+}
+
+.mobile-header-optimized {
+    margin-bottom: 1.25rem !important;
+    gap: 1rem !important;
+}
+
+.mobile-info-optimized {
+    flex: 1 !important;
+    min-width: 0 !important;
+}
+
+.mobile-title-optimized {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 0.5rem !important;
+    color: white !important;
+    line-height: 1.3 !important;
+}
+
+.mobile-amount-optimized {
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    color: #e5e7eb !important;
+    margin-bottom: 0.75rem !important;
+    line-height: 1.2 !important;
+}
+
+.mobile-detail-optimized {
+    font-size: 0.875rem !important;
+    color: #a1a1aa !important;
+    line-height: 1.4 !important;
+    margin-top: 0.375rem !important;
+    padding: 0.25rem 0 !important;
+}
+
+.mobile-badge-optimized {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    border-radius: 9999px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.025em !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    margin-left: 1rem !important;
+}
+
+.mobile-footer-optimized {
+    align-items: center !important;
+    gap: 1rem !important;
+    padding-top: 1rem !important;
+    border-top: 1px solid rgba(75, 85, 99, 0.2) !important;
+}
+
+.mobile-files-optimized {
+    font-size: 0.9rem !important;
+    color: #a1a1aa !important;
+    flex: 1 !important;
+    font-weight: 500 !important;
+}
+
+.mobile-actions-optimized {
+    gap: 0.75rem !important;
+    flex-shrink: 0 !important;
+}
+
+.mobile-btn-optimized {
+    padding: 0.75rem !important;
+    min-width: 2.5rem !important;
+    height: 2.5rem !important;
+    border-radius: 0.5rem !important;
+    background: rgba(55, 65, 81, 0.8) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    border: 1px solid rgba(75, 85, 99, 0.3) !important;
+    
+    &:hover {
+        background: rgba(75, 85, 99, 0.9) !important;
+        border-color: rgba(255, 31, 67, 0.4) !important;
+        transform: scale(1.05) !important;
+    }
+    
+    i {
+        font-size: 1rem !important;
+        color: #f3f4f6 !important;
+    }
+}
+
+// Mejoras adicionales para los archivos en mobile
+.mobile-files-optimized span {
+    background: rgba(55, 65, 81, 0.8) !important;
+    padding: 0.375rem 0.75rem !important;
+    border-radius: 0.5rem !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    margin-left: 0.5rem !important;
+    color: #f3f4f6 !important;
 }

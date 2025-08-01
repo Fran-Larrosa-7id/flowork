@@ -16,7 +16,8 @@
   <div class="max-w-7xl mx-auto p-[3rem]" 
        [ngClass]="{
          'noPadding': isMobile,
-         'ultra-small-padding': isMobile
+         'ultra-small-padding': isMobile,
+         'mobile-container': isMobile
        }">
     
     <!-- Header -->
@@ -155,39 +156,53 @@
       </div>
 
       <!-- Mobile Cards -->
-      <div class="p-4" *ngIf="isMobile">
+      <div class="p-4 mobile-cards-container" [class.mobile-optimized]="isMobile" *ngIf="isMobile">
         <div *ngFor="let comprobante of comprobantes" 
-             class="bg-gray-800/30 rounded-lg p-4 mb-4 border border-gray-700/30">
-          <div class="flex justify-between items-start mb-3">
-            <div>
-              <h3 class="text-white font-medium">{{ comprobante.periodo }}</h3>
-              <p class="text-gray-400 text-sm">
+             class="bg-gray-800/30 rounded-lg border border-gray-700/30 mobile-card" 
+             [class.mobile-card-optimized]="isMobile">
+          <div class="flex justify-between items-start mobile-card-header" 
+               [class.mobile-header-optimized]="isMobile">
+            <div class="mobile-card-info" [class.mobile-info-optimized]="isMobile">
+              <h3 class="text-white font-medium mobile-card-title" 
+                  [class.mobile-title-optimized]="isMobile">{{ comprobante.periodo }}</h3>
+              <p class="text-gray-400 text-sm mobile-card-amount" 
+                 [class.mobile-amount-optimized]="isMobile">
                 ${{ comprobante.monto.toLocaleString('es-AR') }}
               </p>
-              <p class="text-gray-500 text-xs mt-1" *ngIf="comprobante.numero">
+              <p class="text-gray-500 text-xs mt-1 mobile-card-detail" 
+                 [class.mobile-detail-optimized]="isMobile" 
+                 *ngIf="comprobante.numero">
                 {{ comprobante.numero }}
               </p>
-              <p class="text-gray-500 text-xs mt-1" *ngIf="comprobante.cliente">
+              <p class="text-gray-500 text-xs mt-1 mobile-card-detail" 
+                 [class.mobile-detail-optimized]="isMobile" 
+                 *ngIf="comprobante.cliente">
                 {{ comprobante.cliente }}
               </p>
             </div>
-            <span class="px-2 py-1 rounded-full text-xs font-medium" 
+            <span class="px-2 py-1 rounded-full text-xs font-medium mobile-card-badge" 
+                  [class.mobile-badge-optimized]="isMobile"
                   [ngClass]="getEstadoClass(comprobante.estado)">
               {{ comprobante.estado }}
             </span>
           </div>
-          <div class="flex justify-between items-center">
-            <span class="text-gray-400 text-sm">
+          <div class="flex justify-between items-center mobile-card-footer" 
+               [class.mobile-footer-optimized]="isMobile">
+            <span class="text-gray-400 text-sm mobile-card-files" 
+                  [class.mobile-files-optimized]="isMobile">
               Archivos: <span class="bg-gray-700 text-white px-2 py-1 rounded text-xs ml-1">{{ comprobante.archivos }}</span>
             </span>
-            <div class="flex gap-2">
-              <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors"
+            <div class="flex gap-2 mobile-card-actions" 
+                 [class.mobile-actions-optimized]="isMobile">
+              <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors mobile-action-btn"
+                      [class.mobile-btn-optimized]="isMobile"
                       (click)="descargarComprobante(comprobante.id)"
                       title="Descargar comprobante"
                       aria-label="Descargar comprobante">
                 <i class="fas fa-download"></i>
               </button>
-              <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors"
+              <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors mobile-action-btn"
+                      [class.mobile-btn-optimized]="isMobile"
                       (click)="cargarArchivos(comprobante.id)"
                       title="Cargar archivos"
                       aria-label="Cargar archivos">
@@ -208,8 +223,8 @@
     <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" (click)="cerrarModal()"></div>
     
     <!-- Modal Content -->
-    <div class="relative bg-gradient-to-br from-background/95 to-background/90 backdrop-blur-sm border border-white/20 rounded-xl p-6 mx-4 w-full max-w-md"
-        [ngClass]="{'max-w-sm mx-2': isMobile}">
+    <div class="relative bg-gradient-to-br from-background/95 to-background/90 backdrop-blur-sm border border-white/20 rounded-xl p-6 mx-4 w-full max-w-md modal-content"
+        [ngClass]="{'mobile-modal': isMobile}">
         
         <!-- Header -->
         <div class="flex items-center justify-between mb-6">
