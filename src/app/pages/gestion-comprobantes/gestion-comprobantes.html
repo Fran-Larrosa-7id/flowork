@@ -1,0 +1,182 @@
+<div class="p-8 min-h-screen bg-background comprobantesContainer relative" 
+     [class.isMobileContainer]="isMobile">
+  
+  <!-- Button open/close sidebar -->
+  <div class="absolute top-6 left-[4.5rem] toggleBtn" 
+       [ngClass]="{
+         'hidden': (utilService.deviceTypeComputed() === 'desktop' || 
+                   (utilService.toggleSidebar() && utilService.deviceTypeComputed() !== 'desktop')), 
+         'isMobile': isMobile
+       }">
+    <button class="text-white p-[6px] rounded-sm cursor-pointer" (click)="toggleSidebar()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="max-w-7xl mx-auto p-[3rem]" 
+       [ngClass]="{
+         'noPadding': isMobile,
+         'ultra-small-padding': isMobile
+       }" data-aos="zoom-in">
+    
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="title">
+        <h1 class="text-[2.4rem] font-bold text-white mb-2" [ngClass]="{'mobile-main-title': isMobile}">
+          Mis comprobantes
+        </h1>
+        <p class="text-gray-400" [ngClass]="{'mobile-subtitle': isMobile}">
+          Gestiona y controla todos tus comprobantes de manera eficiente
+        </p>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="mb-6">
+      <div class="flex flex-wrap gap-4 items-center justify-between">
+        <!-- Filtros izquierda -->
+        <div class="flex flex-wrap gap-3" [ngClass]="{'mobile-filters': isMobile}">
+          <!-- Filtro por estado -->
+          <div class="filter-dropdown">
+            <select class="bg-gray-800 text-white px-4 py-2 rounded-lg border border-border/30 focus:border-main transition-colors"
+                    [ngClass]="{'mobile-filter': isMobile}"
+                    (change)="filtrarPorEstado($event)">
+              <option value="">Filtrar por estado</option>
+              <option value="NUEVO">Nuevo</option>
+              <option value="ACEPTADO">Aceptado</option>
+              <option value="RECHAZADO">Rechazado</option>
+              <option value="PAGO">Pago</option>
+            </select>
+          </div>
+
+          <!-- Filtro por cliente -->
+          <div class="filter-dropdown">
+            <select class="bg-gray-800 text-white px-4 py-2 rounded-lg border border-border/30 focus:border-main transition-colors"
+                    [ngClass]="{'mobile-filter': isMobile}"
+                    (change)="filtrarPorCliente($event)">
+              <option value="">Filtrar por cliente</option>
+              <option value="cliente1">Cliente 1</option>
+              <option value="cliente2">Cliente 2</option>
+            </select>
+          </div>
+
+          <!-- Filtro por período -->
+          <div class="filter-dropdown">
+            <input type="month" 
+                   class="bg-gray-800 text-white px-4 py-2 rounded-lg border border-border/30 focus:border-main transition-colors"
+                   [ngClass]="{'mobile-filter': isMobile}"
+                   placeholder="Filtrar por período"
+                   (change)="filtrarPorPeriodo($event)">
+          </div>
+        </div>
+
+        <!-- Botón agregar -->
+        <button class="bg-red-700/70 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-900 transition-colors"
+                [ngClass]="{'mobile-add-btn': isMobile}"
+                (click)="agregarComprobante()">
+          <i class="fas fa-plus text-xl"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tabla de comprobantes -->
+    <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white/20 rounded-xl overflow-hidden"
+         [ngClass]="{'mobile-table-container': isMobile}">
+      
+      <!-- Header de la tabla -->
+      <div class="bg-black px-6 py-4">
+        <h2 class="text-white font-semibold text-lg" [ngClass]="{'mobile-table-title': isMobile}">
+          Mis comprobantes
+        </h2>
+        <p class="text-gray-400 text-sm mt-1" [ngClass]="{'mobile-date-range': isMobile}">
+          Marzo 2025- Julio 2025
+        </p>
+      </div>
+
+      <!-- Desktop Table -->
+      <div class="overflow-x-auto" *ngIf="!isMobile">
+        <table class="w-full">
+          <thead class="bg-gray-800/50">
+            <tr>
+              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Período</th>
+              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Monto</th>
+              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Estado</th>
+              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Archivos</th>
+              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let comprobante of comprobantes" 
+                class="border-b border-gray-700/30 hover:bg-gray-800/20 transition-colors">
+              <td class="px-6 py-4 text-white text-center">{{ comprobante.periodo }}</td>
+              <td class="px-6 py-4 text-white font-medium text-center">
+                ${{ comprobante.monto.toLocaleString('es-AR') }}
+              </td>
+              <td class="px-6 py-4 text-center">
+                <span class="px-3 py-1 rounded-full text-xs font-medium" 
+                      [ngClass]="getEstadoClass(comprobante.estado)">
+                  {{ comprobante.estado }}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-center">
+                <span class="bg-gray-700 text-white px-2 py-1 rounded text-xs">
+                  {{ comprobante.archivos }}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-center">
+                <div class="flex gap-2 justify-center">
+                  <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
+                          (click)="descargarComprobante(comprobante.id)"
+                          title="Descargar comprobante">
+                    <i class="fas fa-download"></i>
+                  </button>
+                  <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
+                          (click)="cargarArchivos(comprobante.id)"
+                          title="Cargar archivos">
+                    <i class="fas fa-upload"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile Cards -->
+      <div class="p-4" *ngIf="isMobile">
+        <div *ngFor="let comprobante of comprobantes" 
+             class="bg-gray-800/30 rounded-lg p-4 mb-4 border border-gray-700/30">
+          <div class="flex justify-between items-start mb-3">
+            <div>
+              <h3 class="text-white font-medium">{{ comprobante.periodo }}</h3>
+              <p class="text-gray-400 text-sm">
+                ${{ comprobante.monto.toLocaleString('es-AR') }}
+              </p>
+            </div>
+            <span class="px-2 py-1 rounded-full text-xs font-medium" 
+                  [ngClass]="getEstadoClass(comprobante.estado)">
+              {{ comprobante.estado }}
+            </span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-gray-400 text-sm">
+              Archivos: <span class="bg-gray-700 text-white px-2 py-1 rounded text-xs ml-1">{{ comprobante.archivos }}</span>
+            </span>
+            <div class="flex gap-2">
+              <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors"
+                      (click)="descargarComprobante(comprobante.id)"
+                      title="Descargar comprobante" matTooltip="Descargar comprobante">
+                <i class="fas fa-download"></i>
+              </button>
+              <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors"
+                      (click)="cargarArchivos(comprobante.id)"
+                      title="Cargar archivos">
+                <i class="fas fa-upload"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

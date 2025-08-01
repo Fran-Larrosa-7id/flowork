@@ -20,12 +20,11 @@ export const routes: Routes = [
                 canActivate: [tokenGuard],
                 loadComponent: () => import('./pages/dashboard/dashboard').then(m => m.Dashboard),
             },
-            // Aquí puedes agregar más rutas que necesiten el sidebar
-            // {
-            //     path: 'profile',
-            //     canActivate: [tokenGuard],
-            //     loadComponent: () => import('./pages/profile/profile').then(m => m.Profile),
-            // },
+            {
+                path: 'comprobantes',
+                canActivate: [tokenGuard],
+                loadComponent: () => import('./pages/gestion-comprobantes/gestion-comprobantes').then(m => m.GestionComprobantes),
+            }
         ]
     },
     {
