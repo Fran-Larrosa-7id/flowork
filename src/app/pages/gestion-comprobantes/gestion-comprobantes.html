@@ -100,32 +100,40 @@
         <table class="w-full">
           <thead class="bg-gray-800/50">
             <tr>
-              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Período</th>
-              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Monto</th>
-              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Estado</th>
-              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Archivos</th>
-              <th class="px-6 py-4 text-center text-gray-400 font-medium text-sm">Acciones</th>
+              <th class="px-4 py-4 text-center text-gray-400 font-medium text-sm">Número</th>
+              <th class="px-4 py-4 text-center text-gray-400 font-medium text-sm">Cliente</th>
+              <th class="px-4 py-4 text-center text-gray-400 font-medium text-sm">Período</th>
+              <th class="px-4 py-4 text-center text-gray-400 font-medium text-sm">Monto</th>
+              <th class="px-4 py-4 text-center text-gray-400 font-medium text-sm">Estado</th>
+              <th class="px-4 py-4 text-center text-gray-400 font-medium text-sm">Archivos</th>
+              <th class="px-4 py-4 text-center text-gray-400 font-medium text-sm">Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let comprobante of comprobantes" 
                 class="border-b border-gray-700/30 hover:bg-gray-800/20 transition-colors">
-              <td class="px-6 py-4 text-white text-center">{{ comprobante.periodo }}</td>
-              <td class="px-6 py-4 text-white font-medium text-center">
+              <td class="px-4 py-4 text-white text-center text-sm">
+                {{ comprobante.numero || ('PAG-' + (comprobante.id + '').padStart(4, '0')) }}
+              </td>
+              <td class="px-4 py-4 text-white text-center text-sm">
+                {{ comprobante.cliente || 'Cliente ' + comprobante.id }}
+              </td>
+              <td class="px-4 py-4 text-white text-center">{{ comprobante.periodo }}</td>
+              <td class="px-4 py-4 text-white font-medium text-center">
                 ${{ comprobante.monto.toLocaleString('es-AR') }}
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-4 py-4 text-center">
                 <span class="px-3 py-1 rounded-full text-xs font-medium" 
                       [ngClass]="getEstadoClass(comprobante.estado)">
                   {{ comprobante.estado }}
                 </span>
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-4 py-4 text-center">
                 <span class="bg-gray-700 text-white px-2 py-1 rounded text-xs">
                   {{ comprobante.archivos }}
                 </span>
               </td>
-              <td class="px-6 py-4 text-center">
+              <td class="px-4 py-4 text-center">
                 <div class="flex gap-2 justify-center">
                   <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
                           (click)="descargarComprobante(comprobante.id)"
@@ -155,6 +163,12 @@
               <h3 class="text-white font-medium">{{ comprobante.periodo }}</h3>
               <p class="text-gray-400 text-sm">
                 ${{ comprobante.monto.toLocaleString('es-AR') }}
+              </p>
+              <p class="text-gray-500 text-xs mt-1" *ngIf="comprobante.numero">
+                {{ comprobante.numero }}
+              </p>
+              <p class="text-gray-500 text-xs mt-1" *ngIf="comprobante.cliente">
+                {{ comprobante.cliente }}
               </p>
             </div>
             <span class="px-2 py-1 rounded-full text-xs font-medium" 
@@ -230,25 +244,47 @@
             <p class="text-gray-400 text-sm">Espacio para cargar archivo</p>
             <input #fileInput type="file" multiple class="hidden" (change)="onFileSelect($event)" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx">
             </div>
+            
+            <!-- Botón para archivos de ejemplo -->
+            <div class="mt-2 text-center">
+            <button type="button" 
+                    (click)="agregarArchivosMock()" 
+                    class="text-xs text-gray-500 hover:text-gray-400 transition-colors">
+                + Agregar archivos de ejemplo
+            </button>
+            </div>
         </div>
 
         <!-- Preview de archivos -->
-        <div *ngIf="archivosPreview.length > 0" class="space-y-2">
-            <h4 class="text-gray-400 text-sm">Archivos seleccionados:</h4>
+        <div *ngIf="archivosPreview.length > 0" class="space-y-2 archivos-container">
+            <div class="flex items-center justify-between">
+                <h4 class="text-gray-400 text-sm">Archivos seleccionados:</h4>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-gray-500 bg-gray-700/50 px-2 py-1 rounded">
+                        {{ archivosPreview.length }} archivo{{ archivosPreview.length !== 1 ? 's' : '' }}
+                    </span>
+                    <button *ngIf="archivosPreview.length > 1" 
+                            (click)="limpiarArchivos()"
+                            class="text-xs text-red-400 hover:text-red-300 transition-colors">
+                        <i class="fas fa-trash-alt"></i> Limpiar todo
+                    </button>
+                </div>
+            </div>
+            <div class="max-h-48 overflow-y-auto space-y-2 border border-gray-700/30 rounded-lg p-2 archivos-scroll">
             <div *ngFor="let archivo of archivosPreview" 
-                class="flex items-center justify-between bg-gray-800/50 rounded-lg p-3 border border-gray-700/30">
-            <div class="flex items-center gap-3">
-                <i [class]="getFileIcon(archivo.type)" class="text-main text-lg"></i>
-                <div>
-                <p class="text-white text-sm font-medium">{{ archivo.name }}</p>
+                class="flex items-center justify-between bg-gray-800/50 rounded-lg p-3 border border-gray-700/30 archivo-item">
+            <div class="flex items-center gap-3 min-w-0 flex-1">
+                <i [class]="getFileIcon(archivo.type)" class="text-main text-lg flex-shrink-0"></i>
+                <div class="min-w-0 flex-1 archivo-info">
+                <p class="text-white text-sm font-medium archivo-nombre" [title]="archivo.name">{{ archivo.name }}</p>
                 <p class="text-gray-400 text-xs">{{ formatFileSize(archivo.size) }}</p>
                 </div>
             </div>
             <button (click)="eliminarArchivo(archivo.id)" 
-                    class="text-red-400 hover:text-red-300 transition-colors"
-                    title="Eliminar archivo">
+                    class="text-red-400 hover:text-red-300 transition-colors flex-shrink-0 ml-2">
                 <i class="fas fa-trash text-sm"></i>
             </button>
+            </div>
             </div>
         </div>
         </div>
