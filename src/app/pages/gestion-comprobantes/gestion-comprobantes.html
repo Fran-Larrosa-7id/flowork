@@ -73,7 +73,9 @@
         <!-- Botón agregar -->
         <button class="bg-red-700/70 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-900 transition-colors"
                 [ngClass]="{'mobile-add-btn': isMobile}"
-                (click)="agregarComprobante()">
+                (click)="agregarComprobante()"
+                title="Agregar nuevo comprobante"
+                aria-label="Agregar nuevo comprobante">
           <i class="fas fa-plus text-xl"></i>
         </button>
       </div>
@@ -127,12 +129,14 @@
                 <div class="flex gap-2 justify-center">
                   <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
                           (click)="descargarComprobante(comprobante.id)"
-                          title="Descargar comprobante">
+                          title="Descargar comprobante"
+                          aria-label="Descargar comprobante">
                     <i class="fas fa-download"></i>
                   </button>
                   <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
                           (click)="cargarArchivos(comprobante.id)"
-                          title="Cargar archivos">
+                          title="Cargar archivos"
+                          aria-label="Cargar archivos">
                     <i class="fas fa-upload"></i>
                   </button>
                 </div>
@@ -165,12 +169,14 @@
             <div class="flex gap-2">
               <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors"
                       (click)="descargarComprobante(comprobante.id)"
-                      title="Descargar comprobante" matTooltip="Descargar comprobante">
+                      title="Descargar comprobante"
+                      aria-label="Descargar comprobante">
                 <i class="fas fa-download"></i>
               </button>
               <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors"
                       (click)="cargarArchivos(comprobante.id)"
-                      title="Cargar archivos">
+                      title="Cargar archivos"
+                      aria-label="Cargar archivos">
                 <i class="fas fa-upload"></i>
               </button>
             </div>
