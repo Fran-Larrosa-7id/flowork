@@ -239,3 +239,81 @@ button {
         padding: 0.5rem !important;
     }
 }
+
+// Estilos para el modal
+.fixed {
+    animation: modalBackdropFadeIn 0.3s ease forwards;
+}
+
+.relative.bg-gradient-to-br {
+    animation: modalSlideIn 0.3s ease forwards;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+// Animaciones del modal
+@keyframes modalBackdropFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+// Estilos para el área de carga de archivos
+.border-dashed {
+    &:hover {
+        background-color: rgba(255, 31, 67, 0.05);
+    }
+}
+
+// Estilos para preview de archivos
+.bg-gray-800\/50 {
+    &:hover {
+        background-color: rgba(75, 85, 99, 0.7);
+    }
+}
+
+// Botón deshabilitado
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &:hover {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+}
+
+// Scrollbar personalizado para el modal
+.relative.bg-gradient-to-br {
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+        border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255, 31, 67, 0.5);
+        border-radius: 3px;
+        
+        &:hover {
+            background: rgba(255, 31, 67, 0.7);
+        }
+    }
+}

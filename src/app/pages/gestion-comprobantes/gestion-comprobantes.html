@@ -186,3 +186,85 @@
     </div>
   </div>
 </div>
+
+<!-- Modal para crear nuevo comprobante -->
+ @if(showModal) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm" (click)="cerrarModal()"></div>
+    
+    <!-- Modal Content -->
+    <div class="relative bg-gradient-to-br from-background/95 to-background/90 backdrop-blur-sm border border-white/20 rounded-xl p-6 mx-4 w-full max-w-md"
+        [ngClass]="{'max-w-sm mx-2': isMobile}">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-6">
+        <h2 class="text-white font-semibold text-lg" [ngClass]="{'text-base': isMobile}">
+            Iniciar nuevo pago
+        </h2>
+        <button (click)="cerrarModal()" class="text-gray-400 hover:text-white transition-colors">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+        </div>
+
+        <!-- Formulario -->
+        <div class="space-y-4">
+        <!-- Campo Cliente -->
+        <div>
+            <label class="block text-gray-400 text-sm mb-2">Cliente *</label>
+            <select class="w-full bg-gray-800 text-white px-4 py-2 rounded-lg border border-border/30 focus:border-main transition-colors"
+                    [(ngModel)]="nuevoComprobante.cliente">
+            <option value="">Seleccionar cliente</option>
+            <option value="Grupo Fava">Grupo Fava</option>
+            <option value="Cliente 2">Cliente 2</option>
+            <option value="Cliente 3">Cliente 3</option>
+            </select>
+        </div>
+
+        <!-- Área de carga de archivos -->
+        <div>
+            <label class="block text-gray-400 text-sm mb-2">Archivos</label>
+            <div class="border-2 border-dashed border-gray-600 rounded-lg p-6 text-center hover:border-main transition-colors cursor-pointer"
+                (click)="fileInput.click()">
+            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-2"></i>
+            <p class="text-gray-400 text-sm">Espacio para cargar archivo</p>
+            <input #fileInput type="file" multiple class="hidden" (change)="onFileSelect($event)" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.xls,.xlsx">
+            </div>
+        </div>
+
+        <!-- Preview de archivos -->
+        <div *ngIf="archivosPreview.length > 0" class="space-y-2">
+            <h4 class="text-gray-400 text-sm">Archivos seleccionados:</h4>
+            <div *ngFor="let archivo of archivosPreview" 
+                class="flex items-center justify-between bg-gray-800/50 rounded-lg p-3 border border-gray-700/30">
+            <div class="flex items-center gap-3">
+                <i [class]="getFileIcon(archivo.type)" class="text-main text-lg"></i>
+                <div>
+                <p class="text-white text-sm font-medium">{{ archivo.name }}</p>
+                <p class="text-gray-400 text-xs">{{ formatFileSize(archivo.size) }}</p>
+                </div>
+            </div>
+            <button (click)="eliminarArchivo(archivo.id)" 
+                    class="text-red-400 hover:text-red-300 transition-colors"
+                    title="Eliminar archivo">
+                <i class="fas fa-trash text-sm"></i>
+            </button>
+            </div>
+        </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex gap-3 mt-6 pt-4 border-t border-gray-700/30">
+        <button (click)="cerrarModal()" 
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-2 px-4 rounded-lg transition-colors">
+            Cancelar
+        </button>
+        <button (click)="crearPago()" 
+                class="flex-1 bg-main hover:bg-hover text-white py-2 px-4 rounded-lg transition-colors"
+                [disabled]="!nuevoComprobante.cliente">
+            CREAR PAGO
+        </button>
+        </div>
+    </div>
+</div>
+ }
