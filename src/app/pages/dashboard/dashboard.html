@@ -6,11 +6,11 @@
       <i class="fa-solid fa-bars"></i>
     </button>
   </div>
-  <div class="max-w-7xl mx-auto p-[3rem]" data-aos="zoom-in" 
+  <div class="max-w-7xl mx-auto p-[3rem]" 
        [ngClass]="{
          'noPadding': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet'),
          'ultra-small-padding': isMobile
-       }">>
+       }">
     <!-- Header -->
     <div class="mb-8">
       <div class="title">
@@ -21,7 +21,7 @@
 
 
     <!-- Charts Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-aos="fade-right">
 
       <!-- Card 1: Clientes -->
       <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
