@@ -1,0 +1,156 @@
+.formasPageContainer {
+//   background: linear-gradient(135deg, var(--background-color) 0%, #1a0020 100%);
+    background-color: rgb(20 6 6);
+  
+  .title {
+    text-shadow: 0 2px 10px rgba(255, 31, 67, 0.3);
+  }
+
+  .mobile-card {
+    min-height: 220px !important;
+    padding: 1rem !important;
+  }
+
+  .mobile-title {
+    font-size: 1.1rem !important;
+  }
+
+  .mobile-text {
+    font-size: 0.9rem !important;
+  }
+
+  .toggleBtn {
+    z-index: 100;
+    
+    &.isMobile {
+      left: 1rem !important;
+      top: 1rem !important;
+    }
+    
+    button {
+      background: rgba(255, 31, 67, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      
+      &:hover {
+        background: rgba(255, 31, 67, 1);
+      }
+    }
+  }
+
+  .noPadding {
+    padding: 1rem !important;
+  }
+
+  .ultra-small-padding {
+    padding: 0.5rem !important;
+  }
+
+  // Efectos de hover para las cards
+  .bg-gradient-to-br {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 31, 67, 0.2);
+    }
+  }
+
+  // Animación para los botones de copiar
+  button[title] {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  // Estilos específicos para el feedback de copiado
+  .copy-button {
+    min-width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .copy-feedback {
+      animation: fadeInScale 0.3s ease-out;
+    }
+    
+    &.copied {
+      animation: pulse 0.6s ease-in-out;
+    }
+  }
+
+  // Efectos para los iconos de medios de pago
+  .grid .bg-black\/30 {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+      transform: translateY(-2px);
+      border-color: var(--hover-color);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+  .formasPageContainer {
+    .grid {
+      grid-template-columns: 1fr !important;
+      gap: 1rem !important;
+    }
+    
+    .mobile-card {
+      min-height: 200px !important;
+    }
+    
+    .font-mono {
+      font-size: 0.8rem !important;
+      word-break: break-all;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .formasPageContainer {
+    padding: 0.5rem !important;
+    
+    .max-w-7xl {
+      padding: 1rem !important;
+    }
+    
+    .title h1 {
+      font-size: 1.8rem !important;
+    }
+    
+    .grid > div {
+      padding: 1rem !important;
+    }
+  }
+}
+
+// Animaciones para el feedback visual
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}

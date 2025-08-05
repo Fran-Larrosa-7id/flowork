@@ -31,7 +31,7 @@ export class Login implements OnInit, AfterViewInit {
     private formBuilder: FormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ['userTest@gmail.com', [Validators.required, Validators.email]],
+      email: ['comercial@gmail.com', [Validators.required, Validators.email]],
       password: ['123456', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -49,7 +49,7 @@ export class Login implements OnInit, AfterViewInit {
         // Mock token generation
         localStorage.setItem('token', 'mock-token');
         // Mock role setting
-        this._rolService.setRole('comercial');
+        this.validRol(formData.email);
         // Redirect to dashboard
         this._router.navigate(['/dashboard']);
       }, 1700);
@@ -67,6 +67,18 @@ export class Login implements OnInit, AfterViewInit {
         video.play().catch(() => console.log('🛑 No se pudo reproducir'));
       }
     }, 500);
+  }
+
+  /**
+   * Validar el rol del usuario basado en el correo electrónico
+   * @param email El correo electrónico del usuario
+   */
+  validRol(email: string) {
+    if (email === 'comercial@gmail.com') {
+      this._rolService.setRole('comercial');
+    } else if (email === 'cliente@gmail.com') {
+      this._rolService.setRole('cliente');
+    }
   }
 
   typeLoop(): void {

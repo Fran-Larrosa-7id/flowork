@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UtilService } from '../../services/util';
 import { MaterialDesignModule } from '../../shared/material-design.module';
+import { RolService } from '../../services/rol';
 
 interface Comprobante {
   id: number;
@@ -31,7 +32,7 @@ interface ArchivoPreview {
 })
 export class GestionComprobantes {
   utilService = inject(UtilService);
-  
+  rolService = inject(RolService);
   // Propiedades para responsive
   public isMobile = false;
   public deviceType = '';
@@ -199,6 +200,23 @@ export class GestionComprobantes {
     console.log('Eliminar comprobante:', id);
   }
 
+  // Métodos para aceptar y rechazar comprobantes (rol cliente)
+  aceptarComprobante(id: number) {
+    const comprobante = this.comprobantes.find(c => c.id === id);
+    if (comprobante && comprobante.estado === 'NUEVO') {
+      comprobante.estado = 'ACEPTADO';
+      console.log('Comprobante aceptado:', id);
+    }
+  }
+
+  rechazarComprobante(id: number) {
+    const comprobante = this.comprobantes.find(c => c.id === id);
+    if (comprobante && comprobante.estado === 'NUEVO') {
+      comprobante.estado = 'RECHAZADO';
+      console.log('Comprobante rechazado:', id);
+    }
+  }
+
   // Método para obtener clase CSS del estado
   getEstadoClass(estado: string): string {
     switch (estado) {
@@ -356,5 +374,10 @@ export class GestionComprobantes {
     if (type.includes('word')) return 'fas fa-file-word';
     if (type.includes('excel')) return 'fas fa-file-excel';
     return 'fas fa-file';
+  }
+
+  // Método temporal para testing - puedes removerlo después
+  cambiarRol(nuevoRol: string) {
+    this.rolService.setRole(nuevoRol);
   }
 }

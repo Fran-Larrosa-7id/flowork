@@ -30,22 +30,32 @@
             <a routerLink="/comprobantes" routerLinkActive="bg-main/20 border-main text-white"
                 class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
                 <i class="fa-solid fa-folder-open text-main mr-3"></i>
-                Gestión de comprobantes
+                {{ this.role === 'comercial' ? 'Gestión de comprobantes' : 'Mis comprobantes' }}
             </a>
 
-            <!-- Clientes -->
-            <a routerLink="/reports" routerLinkActive="bg-main/20 border-main text-white"
-                class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
-                <i class="fas fa-chart-bar mr-3 text-main"></i>
-                Clientes
-            </a>
+            @if(role === 'comercial') {
+                <!-- Clientes -->
+                <a routerLink="/reports" routerLinkActive="bg-main/20 border-main text-white"
+                    class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
+                    <i class="fas fa-chart-bar mr-3 text-main"></i>
+                    Clientes
+                </a>
+            } @else {
+                <!-- Formas de pago -->
+                <a routerLink="/formas-de-pago" routerLinkActive="bg-main/20 border-main text-white"
+                    class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
+                    <i class="fas fa-credit-card mr-3 text-main"></i>
+                    Formas de pago
+                </a>
+            }
+
 
             <!-- Configuración -->
-            <a routerLink="/settings" routerLinkActive="bg-main/20 border-main text-white"
+            <!-- <a routerLink="/settings" routerLinkActive="bg-main/20 border-main text-white"
                 class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200">
                 <i class="fas fa-cog mr-3 text-main"></i>
                 Configuración
-            </a>
+            </a> -->
 
             <!-- Cerrar sesión -->
             <a class="flex items-center px-4 py-3 text-gray-300 rounded-lg hover:bg-main/10 hover:text-white transition-all duration-200 cursor-pointer"

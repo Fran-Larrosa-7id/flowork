@@ -14,9 +14,10 @@ export class Sidebar {
   private _router = inject(Router);
   private _roleService = inject(RolService);
 
-  private rolEffect = effect(() => {
+  constructor(){
     this.role = this._roleService.roleUser$();
-  });
+  }
+
 
   logout() {
     localStorage.removeItem('token');

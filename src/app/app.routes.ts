@@ -24,6 +24,11 @@ export const routes: Routes = [
                 path: 'comprobantes',
                 canActivate: [tokenGuard],
                 loadComponent: () => import('./pages/gestion-comprobantes/gestion-comprobantes').then(m => m.GestionComprobantes),
+            },
+            {
+                path: 'formas-de-pago',
+                canActivate: [tokenGuard],
+                loadComponent: () => import('./pages/formas-de-pago/formas-de-pago').then(m => m.FormasDePago),
             }
         ]
     },

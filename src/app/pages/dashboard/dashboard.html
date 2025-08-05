@@ -1,13 +1,14 @@
-<div class="p-8 min-h-screen bg-background dashboardContainer relative" [class.isMobileContainer]="(utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')">
+<div class="p-8 min-h-screen bg-background dashboardContainer relative"
+  [class.isMobileContainer]="(utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')">
   <!-- Button open/close sidebar -->
-  <div class="absolute top-6 left-[4.5rem] toggleBtn" [ngClass]="{'hidden': (utilService.deviceTypeComputed() === 'desktop' ||
+  <div class="absolute top-6 left-[4.5rem] toggleBtn"
+    [ngClass]="{'hidden': (utilService.deviceTypeComputed() === 'desktop' ||
   (utilService.toggleSidebar() && utilService.deviceTypeComputed() !== 'desktop')), 'isMobile': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')}">
     <button class=" text-white p-[6px] rounded-sm cursor-pointer" (click)="toggleSidebar()">
       <i class="fa-solid fa-bars"></i>
     </button>
   </div>
-  <div class="max-w-7xl mx-auto p-[3rem]" 
-       [ngClass]="{
+  <div class="max-w-7xl mx-auto p-[3rem]" [ngClass]="{
          'noPadding': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet'),
          'ultra-small-padding': isMobile
        }">
@@ -23,95 +24,185 @@
     <!-- Charts Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-aos="fade-right">
 
-      <!-- Card 1: Clientes -->
-      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
-           [ngClass]="{'mobile-card': isMobile}">
-        <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-3">
-            <i class="fas fa-users text-white text-xl"></i>
-            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Clientes</h3>
+      <!-- Dashboard para rol COMERCIAL -->
+      @if(rolService.roleUser$() === 'comercial'){
+        <!-- Card 1: Clientes -->
+        <div
+          class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
+          [ngClass]="{'mobile-card': isMobile}">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <i class="fas fa-users text-white text-xl"></i>
+              <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Clientes</h3>
+            </div>
+          </div>
+          <div class="flex items-center justify-between" [ngClass]="{'mobile-content': isMobile}">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-hover rounded-full" [ngClass]="{'mobile-dot': isMobile}"></div>
+                <span class="text-white text-lg" [ngClass]="{'mobile-text': isMobile}">60% Situación correcta</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-border rounded-full" [ngClass]="{'mobile-dot': isMobile}"></div>
+                <span class="text-white text-lg" [ngClass]="{'mobile-text': isMobile}">40% Deudores</span>
+              </div>
+              <p class="text-white/60 text-lg mt-4" [ngClass]="{'mobile-total': isMobile}">TOTAL: {{ totalClientes }}
+                Clientes</p>
+            </div>
+            <div class="w-40 h-40 flex-shrink-0" [ngClass]="{'mobile-chart': isMobile}">
+              <canvas baseChart [type]="clientesChartType" [data]="clientesChartData" [options]="clientesChartOptions">
+              </canvas>
+            </div>
           </div>
         </div>
-        <div class="flex items-center justify-between" [ngClass]="{'mobile-content': isMobile}">
-          <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-3">
-              <div class="w-4 h-4 bg-hover rounded-full" [ngClass]="{'mobile-dot': isMobile}"></div>
-              <span class="text-white text-lg" [ngClass]="{'mobile-text': isMobile}">60% Situación correcta</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-4 h-4 bg-border rounded-full" [ngClass]="{'mobile-dot': isMobile}"></div>
-              <span class="text-white text-lg" [ngClass]="{'mobile-text': isMobile}">40% Deudores</span>
-            </div>
-            <p class="text-white/60 text-lg mt-4" [ngClass]="{'mobile-total': isMobile}">TOTAL: {{ totalClientes }} Clientes</p>
-          </div>
-          <div class="w-40 h-40 flex-shrink-0" [ngClass]="{'mobile-chart': isMobile}">
-            <canvas baseChart [type]="clientesChartType" [data]="clientesChartData" [options]="clientesChartOptions">
-            </canvas>
-          </div>
-        </div>
-      </div>
 
-      <!-- Card 2: Facturas pagas del período -->
-      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
-           [ngClass]="{'mobile-card': isMobile}">
-        <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-3">
-            <i class="fas fa-file-invoice text-white text-xl"></i>
-            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Facturas pagas</h3>
+        <!-- Card 2: Facturas pagas del período -->
+        <div
+          class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
+          [ngClass]="{'mobile-card': isMobile}">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <i class="fas fa-file-invoice text-white text-xl"></i>
+              <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Facturas pagas</h3>
+            </div>
+          </div>
+          <div class="flex items-center justify-between" [ngClass]="{'mobile-content': isMobile}">
+            <div class="flex flex-col gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-main rounded-full" [ngClass]="{'mobile-dot': isMobile}"></div>
+                <span class="text-white text-lg" [ngClass]="{'mobile-text': isMobile}">70% Paga</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-4 h-4 bg-border rounded-full" [ngClass]="{'mobile-dot': isMobile}"></div>
+                <span class="text-white text-lg" [ngClass]="{'mobile-text': isMobile}">30% Pendiente</span>
+              </div>
+              <p class="text-white/60 text-lg mt-4" [ngClass]="{'mobile-total': isMobile}">TOTAL: {{ totalFacturas }}
+                Facturas</p>
+            </div>
+            <div class="w-40 h-40 flex-shrink-0" [ngClass]="{'mobile-chart': isMobile}">
+              <canvas baseChart [type]="facturasChartType" [data]="facturasChartData" [options]="facturasChartOptions">
+              </canvas>
+            </div>
           </div>
         </div>
-        <div class="flex items-center justify-between" [ngClass]="{'mobile-content': isMobile}">
-          <div class="flex flex-col gap-3">
-            <div class="flex items-center gap-3">
-              <div class="w-4 h-4 bg-main rounded-full" [ngClass]="{'mobile-dot': isMobile}"></div>
-              <span class="text-white text-lg" [ngClass]="{'mobile-text': isMobile}">70% Paga</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <div class="w-4 h-4 bg-border rounded-full" [ngClass]="{'mobile-dot': isMobile}"></div>
-              <span class="text-white text-lg" [ngClass]="{'mobile-text': isMobile}">30% Pendiente</span>
-            </div>
-            <p class="text-white/60 text-lg mt-4" [ngClass]="{'mobile-total': isMobile}">TOTAL: {{ totalFacturas }} Facturas</p>
-          </div>
-          <div class="w-40 h-40 flex-shrink-0" [ngClass]="{'mobile-chart': isMobile}">
-            <canvas baseChart [type]="facturasChartType" [data]="facturasChartData" [options]="facturasChartOptions">
-            </canvas>
-          </div>
-        </div>
-      </div>
 
-      <!-- Card 3: Deuda total -->
-      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px] flex flex-col"
-           [ngClass]="{'mobile-card mobile-card-debt': isMobile}">
-        <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-3">
-            <i class="fas fa-dollar-sign text-white text-xl"></i>
+        <!-- Card 3: Deuda total -->
+        <div
+          class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px] flex flex-col"
+          [ngClass]="{'mobile-card mobile-card-debt': isMobile}">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <i class="fas fa-dollar-sign text-white text-xl"></i>
+              <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Deuda total</h3>
+            </div>
+          </div>
+          <div class="flex items-center justify-center flex-1">
+            <h2 class="text-6xl font-bold text-white" [ngClass]="{'mobile-debt-amount': isMobile}">
+              ${{ deudaTotal.toLocaleString('es-AR') }}
+            </h2>
+          </div>
+        </div>
+
+        <!-- Card 4: Ingresos 2025 -->
+        <div
+          class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
+          [ngClass]="{'mobile-card': isMobile}">
+          <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+              <i class="fas fa-chart-bar text-white text-xl"></i>
+              <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Ingresos 2025</h3>
+            </div>
+          </div>
+          <div class="flex items-center justify-center flex-1">
+            <div class="w-full h-32" [ngClass]="{'mobile-bar-chart': isMobile}">
+              <canvas baseChart [type]="ingresosChartType" [data]="ingresosChartData" [options]="ingresosChartOptions">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      } @else {
+
+      <!-- Dashboard para rol CLIENTE -->
+        <!-- Card 1: Saldo a pagar -->
+        <div
+          class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px] flex flex-col justify-between"
+          [ngClass]="{'mobile-card': isMobile}">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="fas fa-calendar text-white text-xl"></i>
+            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Saldo a pagar</h3>
+          </div>
+          <div class="flex-1 flex flex-col justify-center items-center">
+            <h2 class="text-5xl font-bold text-white mb-4" [ngClass]="{'mobile-debt-amount': isMobile}">
+              ${{ saldoAPagar.toLocaleString('es-AR') }}
+            </h2>
+            <button
+              class="bg-gray-600 hover:bg-gray-500 text-white px-6 py-2 rounded font-medium transition-colors duration-200"
+              (click)="descargarComprobante()">
+              DESCARGAR
+            </button>
+          </div>
+          <div class="text-center mt-4">
+            <p class="text-white/60 text-sm">Vencimiento {{ vencimiento }}</p>
+          </div>
+        </div>
+
+        <!-- Card 2: Deuda total -->
+        <div
+          class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px] flex flex-col justify-between"
+          [ngClass]="{'mobile-card': isMobile}">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="fas fa-credit-card text-white text-xl"></i>
             <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Deuda total</h3>
           </div>
-        </div>
-        <div class="flex items-center justify-center flex-1">
-          <h2 class="text-6xl font-bold text-white" [ngClass]="{'mobile-debt-amount': isMobile}">
-            ${{ deudaTotal.toLocaleString('es-AR') }}
-          </h2>
-        </div>
-      </div>
-
-      <!-- Card 4: Ingresos 2025 -->
-      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
-           [ngClass]="{'mobile-card': isMobile}">
-        <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-3">
-            <i class="fas fa-chart-bar text-white text-xl"></i>
-            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Ingresos 2025</h3>
+          <div class="flex-1 flex flex-col justify-center items-center">
+            <h2 class="text-5xl font-bold text-white mb-4" [ngClass]="{'mobile-debt-amount': isMobile}">
+              ${{ deudaTotalCliente.toLocaleString('es-AR') }}
+            </h2>
+            <button
+              class="bg-gray-600 hover:bg-gray-500 text-white px-6 py-2 rounded font-medium transition-colors duration-200"
+              (click)="verAvisoDeuda()">
+              VER AVISO DE DEUDA
+            </button>
           </div>
         </div>
-        <div class="flex items-center justify-center flex-1">
-          <div class="w-full h-32" [ngClass]="{'mobile-bar-chart': isMobile}">
-            <canvas baseChart [type]="ingresosChartType" [data]="ingresosChartData" [options]="ingresosChartOptions">
-            </canvas>
+
+        <!-- Card 3: Mis datos -->
+        <div
+          class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
+          [ngClass]="{'mobile-card': isMobile}">
+          <div class="flex items-center gap-3 mb-6">
+            <i class="fas fa-user text-white text-xl"></i>
+            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Mis datos</h3>
+          </div>
+          <div class="space-y-4">
+            <div>
+              <p class="text-white/60 text-sm mb-1">Nombre</p>
+              <p class="text-white text-lg font-medium">{{ nombreCliente }}</p>
+            </div>
+            <div>
+              <p class="text-white/60 text-sm mb-1">Cierre del período</p>
+              <p class="text-white text-lg font-medium">{{ cierreDelPeriodo }}</p>
+            </div>
+            <div>
+              <p class="text-white/60 text-sm mb-1">Situación</p>
+              <span class="inline-block bg-red-600 text-white px-3 py-1 rounded text-sm font-medium">
+                {{ situacionCliente }}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
+        <!-- Card 4: Vista de la última factura -->
+        <div
+          class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px] flex flex-col justify-center items-center cursor-pointer hover:bg-gradient-to-br hover:from-background/90 hover:to-background/70 transition-all duration-200"
+          [ngClass]="{'mobile-card': isMobile}" (click)="verUltimaFactura()">
+          <i class="fas fa-file-invoice-dollar text-white text-4xl mb-4"></i>
+          <h3 class="text-xl font-semibold text-white text-center" [ngClass]="{'mobile-title': isMobile}">
+            Vista de la última factura
+          </h3>
+          <p class="text-white/60 text-center mt-2">Haga clic para ver los detalles</p>
+        </div>
+      }
     </div>
   </div>
 </div>

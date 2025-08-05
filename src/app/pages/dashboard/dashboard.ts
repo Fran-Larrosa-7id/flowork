@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
 import { UtilService } from '../../services/util';
+import { RolService } from '../../services/rol';
 
 @Component({
   selector: 'app-dashboard',
@@ -88,6 +89,15 @@ export class Dashboard implements OnInit {
   public totalFacturas = 80;
   public deudaTotal = 120500;
   utilService = inject(UtilService);
+  rolService = inject(RolService);
+
+  // Datos específicos para rol cliente
+  public saldoAPagar = 45600;
+  public deudaTotalCliente = 75600;
+  public nombreCliente = 'Grupo Fava';
+  public cierreDelPeriodo = '10/07/2025';
+  public situacionCliente = 'Deudor';
+  public vencimiento = '10/07/2025';
 
   // Propiedades para responsive
   public isMobile = false;
@@ -138,5 +148,26 @@ export class Dashboard implements OnInit {
   // Método para alternar la visibilidad del sidebar
   toggleSidebar() {
     this.utilService.toggleSidebarState();
+  }
+
+  // Métodos para acciones del cliente
+  descargarComprobante() {
+    console.log('Descargando comprobante...');
+    // Aquí iría la lógica para descargar el comprobante
+  }
+
+  verAvisoDeuda() {
+    console.log('Viendo aviso de deuda...');
+    // Aquí iría la lógica para ver el aviso de deuda
+  }
+
+  verUltimaFactura() {
+    console.log('Viendo última factura...');
+    // Aquí iría la lógica para ver la última factura
+  }
+
+  // Método temporal para testing - puedes removerlo después
+  cambiarRol(nuevoRol: string) {
+    this.rolService.setRole(nuevoRol);
   }
 }

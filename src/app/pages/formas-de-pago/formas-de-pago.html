@@ -1,0 +1,174 @@
+<div class="p-8 min-h-screen bg-background formasPageContainer relative"
+  [class.isMobileContainer]="(utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')">
+  
+  <!-- Button open/close sidebar -->
+  <div class="absolute top-6 left-[4.5rem] toggleBtn"
+    [ngClass]="{'hidden': (utilService.deviceTypeComputed() === 'desktop' ||
+  (utilService.toggleSidebar() && utilService.deviceTypeComputed() !== 'desktop')), 'isMobile': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')}">
+    <button class=" text-white p-[6px] rounded-sm cursor-pointer" (click)="toggleSidebar()">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </div>
+
+  <div class="max-w-7xl mx-auto p-[3rem]" [ngClass]="{
+         'noPadding': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet'),
+         'ultra-small-padding': isMobile
+       }">
+    
+    <!-- Header -->
+    <div class="mb-8">
+      <div class="title">
+        <h1 class="text-[2.4rem] font-bold text-white mb-2">Formas de Pago</h1>
+        <p class="text-gray-400">Selecciona el método de pago que prefieras para realizar tus transacciones</p>
+      </div>
+    </div>
+
+    <!-- Payment Methods Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" data-aos="fade-right">
+
+      <!-- Card 1: Transferencia Bancaria -->
+      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
+        [ngClass]="{'mobile-card': isMobile}">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-3">
+            <i class="fas fa-university text-white text-xl"></i>
+            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Transferencia Bancaria</h3>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-black/30 rounded-lg p-4 border border-border">
+            <div class="mb-3">
+              <p class="text-white/60 text-sm mb-1">CBU</p>
+              <div class="flex items-center justify-between">
+                <p class="text-white text-lg font-mono" [ngClass]="{'mobile-text': isMobile}">{{ cbuTransferencia }}</p>
+                <button 
+                  class="copy-button transition-all duration-300 px-2 py-1 rounded"
+                  [ngClass]="{'copied text-green-400 bg-green-400/20': copiedStates()[('cbu-transferencia')], 'text-hover hover:text-white hover:bg-hover/20': !copiedStates()[('cbu-transferencia')]}"
+                  (click)="copyToClipboard(cbuTransferencia, 'cbu-transferencia')" 
+                  title="Copiar CBU">
+                  <i class="fas transition-all duration-200" [ngClass]="copiedStates()[('cbu-transferencia')] ? 'fa-check' : 'fa-copy'"></i>
+                  <span class="copy-feedback text-xs ml-1" *ngIf="copiedStates()[('cbu-transferencia')]">¡Copiado!</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <p class="text-white/60 text-sm mb-1">ALIAS</p>
+              <div class="flex items-center justify-between">
+                <p class="text-white text-lg font-mono" [ngClass]="{'mobile-text': isMobile}">{{ aliasTransferencia }}</p>
+                <button 
+                  class="copy-button transition-all duration-300 px-2 py-1 rounded"
+                  [ngClass]="{'copied text-green-400 bg-green-400/20': copiedStates()[('alias-transferencia')], 'text-hover hover:text-white hover:bg-hover/20': !copiedStates()[('alias-transferencia')]}"
+                  (click)="copyToClipboard(aliasTransferencia, 'alias-transferencia')" 
+                  title="Copiar ALIAS">
+                  <i class="fas transition-all duration-200" [ngClass]="copiedStates()[('alias-transferencia')] ? 'fa-check' : 'fa-copy'"></i>
+                  <span class="copy-feedback text-xs ml-1" *ngIf="copiedStates()[('alias-transferencia')]">¡Copiado!</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <p class="text-white/60 text-sm">Una vez realizada la transferencia, envía el comprobante por WhatsApp</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Depósito en Cuenta -->
+      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
+        [ngClass]="{'mobile-card': isMobile}">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-3">
+            <i class="fas fa-building text-white text-xl"></i>
+            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Depósito en Cuenta</h3>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="bg-black/30 rounded-lg p-4 border border-border">
+            <div class="mb-3">
+              <p class="text-white/60 text-sm mb-1">CBU</p>
+              <div class="flex items-center justify-between">
+                <p class="text-white text-lg font-mono" [ngClass]="{'mobile-text': isMobile}">{{ cbuDeposito }}</p>
+                <button 
+                  class="copy-button transition-all duration-300 px-2 py-1 rounded"
+                  [ngClass]="{'copied text-green-400 bg-green-400/20': copiedStates()[('cbu-deposito')], 'text-hover hover:text-white hover:bg-hover/20': !copiedStates()[('cbu-deposito')]}"
+                  (click)="copyToClipboard(cbuDeposito, 'cbu-deposito')" 
+                  title="Copiar CBU">
+                  <i class="fas transition-all duration-200" [ngClass]="copiedStates()[('cbu-deposito')] ? 'fa-check' : 'fa-copy'"></i>
+                  <span class="copy-feedback text-xs ml-1" *ngIf="copiedStates()[('cbu-deposito')]">¡Copiado!</span>
+                </button>
+              </div>
+            </div>
+            <div>
+              <p class="text-white/60 text-sm mb-1">TITULAR</p>
+              <p class="text-white text-lg font-medium" [ngClass]="{'mobile-text': isMobile}">{{ titularCuenta }}</p>
+            </div>
+          </div>
+          <p class="text-white/60 text-sm">Realiza el depósito en cualquier sucursal bancaria y envía el comprobante</p>
+        </div>
+      </div>
+
+      <!-- Card 3: Medios de Pago Aceptados -->
+      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
+        [ngClass]="{'mobile-card': isMobile}">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-3">
+            <i class="fas fa-credit-card text-white text-xl"></i>
+            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Medios Aceptados</h3>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-black/30 rounded-lg p-3 border border-border text-center">
+              <i class="fab fa-cc-visa text-blue-400 text-2xl mb-2"></i>
+              <p class="text-white text-sm">Visa</p>
+            </div>
+            <div class="bg-black/30 rounded-lg p-3 border border-border text-center">
+              <i class="fab fa-cc-mastercard text-red-400 text-2xl mb-2"></i>
+              <p class="text-white text-sm">Mastercard</p>
+            </div>
+            <div class="bg-black/30 rounded-lg p-3 border border-border text-center">
+              <i class="fas fa-university text-green-400 text-2xl mb-2"></i>
+              <p class="text-white text-sm">Transferencia</p>
+            </div>
+            <div class="bg-black/30 rounded-lg p-3 border border-border text-center">
+              <i class="fas fa-money-bill-wave text-yellow-400 text-2xl mb-2"></i>
+              <p class="text-white text-sm">Efectivo</p>
+            </div>
+          </div>
+          <p class="text-white/60 text-sm text-center">Todos los métodos de pago son seguros y confiables</p>
+        </div>
+      </div>
+
+      <!-- Card 4: Información y Contacto -->
+      <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 min-h-[270px]"
+        [ngClass]="{'mobile-card': isMobile}">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-3">
+            <i class="fas fa-info-circle text-white text-xl"></i>
+            <h3 class="text-xl font-semibold text-white" [ngClass]="{'mobile-title': isMobile}">Información Adicional</h3>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <i class="fas fa-clock text-hover text-sm"></i>
+              <span class="text-white text-sm">Horario de atención: Lun-Vie 9:00 - 18:00</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fab fa-whatsapp text-green-400 text-sm"></i>
+              <span class="text-white text-sm">WhatsApp: {{ whatsappNumber }}</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <i class="fas fa-envelope text-hover text-sm"></i>
+              <span class="text-white text-sm">Email: {{ emailPagos }}</span>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button class="w-full bg-hover hover:bg-main text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center gap-2" (click)="contactWhatsApp()">
+              <i class="fab fa-whatsapp"></i>
+              Contactar por WhatsApp
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

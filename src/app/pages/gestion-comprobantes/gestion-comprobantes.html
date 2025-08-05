@@ -72,13 +72,15 @@
         </div>
 
         <!-- Botón agregar -->
-        <button class="bg-red-700/70 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-900 transition-colors"
-                [ngClass]="{'mobile-add-btn': isMobile}"
-                (click)="agregarComprobante()"
-                title="Agregar nuevo comprobante"
-                aria-label="Agregar nuevo comprobante">
-          <i class="fas fa-plus text-xl"></i>
-        </button>
+         @if(rolService.roleUser$() === 'comercial'){
+          <button class="bg-red-700/70 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-900 transition-colors"
+                  [ngClass]="{'mobile-add-btn': isMobile}"
+                  (click)="agregarComprobante()"
+                  title="Agregar nuevo comprobante"
+                  aria-label="Agregar nuevo comprobante">
+            <i class="fas fa-plus text-xl"></i>
+          </button>
+      }
       </div>
     </div>
 
@@ -97,7 +99,7 @@
       </div>
 
       <!-- Desktop Table -->
-      <div class="overflow-x-auto" *ngIf="!isMobile">
+      <div class="overflow-x-auto overflow-y-visible" *ngIf="!isMobile" style="overflow: visible;">
         <table class="w-full">
           <thead class="bg-gray-800/50">
             <tr>
@@ -136,18 +138,35 @@
               </td>
               <td class="px-4 py-4 text-center">
                 <div class="flex gap-2 justify-center">
-                  <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
-                          (click)="descargarComprobante(comprobante.id)"
-                          title="Descargar comprobante"
-                          aria-label="Descargar comprobante">
-                    <i class="fas fa-download"></i>
-                  </button>
-                  <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
-                          (click)="cargarArchivos(comprobante.id)"
-                          title="Cargar archivos"
-                          aria-label="Cargar archivos">
-                    <i class="fas fa-upload"></i>
-                  </button>
+                  <!-- Mostrar botones Aceptar/Rechazar solo si es estado NUEVO y rol cliente -->
+                  <ng-container *ngIf="comprobante.estado === 'NUEVO' && rolService.roleUser$() === 'cliente'">
+                    <button class="bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded text-xs transition-colors"
+                            (click)="aceptarComprobante(comprobante.id)"
+                            aria-label="Aceptar comprobante">
+                      <i class="fas fa-check"></i>
+                    </button>
+                    <button class="bg-red-600 hover:bg-red-500 text-white px-3 py-1 rounded text-xs transition-colors"
+                            (click)="rechazarComprobante(comprobante.id)"
+                            aria-label="Rechazar comprobante">
+                      <i class="fas fa-times"></i>
+                    </button>
+                  </ng-container>
+                  
+                  <!-- Mostrar botones normales en todos los otros casos -->
+                  <ng-container *ngIf="!(comprobante.estado === 'NUEVO' && rolService.roleUser$() === 'cliente')">
+                    <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
+                            (click)="descargarComprobante(comprobante.id)"
+                            title="Descargar comprobante"
+                            aria-label="Descargar comprobante">
+                      <i class="fas fa-download"></i>
+                    </button>
+                    <button class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs transition-colors"
+                            (click)="cargarArchivos(comprobante.id)"
+                            title="Cargar archivos"
+                            aria-label="Cargar archivos">
+                      <i class="fas fa-upload"></i>
+                    </button>
+                  </ng-container>
                 </div>
               </td>
             </tr>
@@ -194,20 +213,39 @@
             </span>
             <div class="flex gap-2 mobile-card-actions" 
                  [class.mobile-actions-optimized]="isMobile">
-              <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors mobile-action-btn"
-                      [class.mobile-btn-optimized]="isMobile"
-                      (click)="descargarComprobante(comprobante.id)"
-                      title="Descargar comprobante"
-                      aria-label="Descargar comprobante">
-                <i class="fas fa-download"></i>
-              </button>
-              <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors mobile-action-btn"
-                      [class.mobile-btn-optimized]="isMobile"
-                      (click)="cargarArchivos(comprobante.id)"
-                      title="Cargar archivos"
-                      aria-label="Cargar archivos">
-                <i class="fas fa-upload"></i>
-              </button>
+              <!-- Mostrar botones Aceptar/Rechazar solo si es estado NUEVO y rol cliente -->
+              <ng-container *ngIf="comprobante.estado === 'NUEVO' && rolService.roleUser$() === 'cliente'">
+                <button class="bg-green-600 hover:bg-green-500 text-white px-2 py-1 rounded text-xs transition-colors mobile-action-btn"
+                        [class.mobile-btn-optimized]="isMobile"
+                        (click)="aceptarComprobante(comprobante.id)"
+                        aria-label="Aceptar comprobante">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button class="bg-red-600 hover:bg-red-500 text-white px-2 py-1 rounded text-xs transition-colors mobile-action-btn"
+                        [class.mobile-btn-optimized]="isMobile"
+                        (click)="rechazarComprobante(comprobante.id)"
+                        aria-label="Rechazar comprobante">
+                  <i class="fas fa-times"></i>
+                </button>
+              </ng-container>
+              
+              <!-- Mostrar botones normales en todos los otros casos -->
+              <ng-container *ngIf="!(comprobante.estado === 'NUEVO' && rolService.roleUser$() === 'cliente')">
+                <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors mobile-action-btn"
+                        [class.mobile-btn-optimized]="isMobile"
+                        (click)="descargarComprobante(comprobante.id)"
+                        title="Descargar comprobante"
+                        aria-label="Descargar comprobante">
+                  <i class="fas fa-download"></i>
+                </button>
+                <button class="bg-gray-700 hover:bg-gray-600 text-white px-2 py-1 rounded text-xs transition-colors mobile-action-btn"
+                        [class.mobile-btn-optimized]="isMobile"
+                        (click)="cargarArchivos(comprobante.id)"
+                        title="Cargar archivos"
+                        aria-label="Cargar archivos">
+                  <i class="fas fa-upload"></i>
+                </button>
+              </ng-container>
             </div>
           </div>
         </div>
@@ -275,9 +313,11 @@
             <div class="flex items-center justify-between">
                 <h4 class="text-gray-400 text-sm">Archivos seleccionados:</h4>
                 <div class="flex items-center gap-2">
-                    <span class="text-xs text-gray-500 bg-gray-700/50 px-2 py-1 rounded">
+                    @if(!isMobile){
+                      <span class="text-xs text-gray-500 bg-gray-700/50 px-2 py-1 rounded">
                         {{ archivosPreview.length }} archivo{{ archivosPreview.length !== 1 ? 's' : '' }}
                     </span>
+                    }
                     <button *ngIf="archivosPreview.length > 1" 
                             (click)="limpiarArchivos()"
                             class="text-xs text-red-400 hover:text-red-300 transition-colors">
