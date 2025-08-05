@@ -29,6 +29,11 @@ export const routes: Routes = [
                 path: 'formas-de-pago',
                 canActivate: [tokenGuard],
                 loadComponent: () => import('./pages/formas-de-pago/formas-de-pago').then(m => m.FormasDePago),
+            },
+            {
+                path: 'clientes',
+                canActivate: [tokenGuard],
+                loadComponent: () => import('./pages/clientes/clientes').then(m => m.Clientes),
             }
         ]
     },

@@ -1,0 +1,591 @@
+<div class="p-8 min-h-screen bg-background clientesPageContainer relative"
+    [class.isMobileContainer]="(utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')">
+
+    <!-- Button open/close sidebar -->
+    <div class="absolute top-6 left-[4.5rem] toggleBtn"
+        [ngClass]="{'hidden': (utilService.deviceTypeComputed() === 'desktop' ||
+  (utilService.toggleSidebar() && utilService.deviceTypeComputed() !== 'desktop')), 'isMobile': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet')}">
+        <button class=" text-white p-[6px] rounded-sm cursor-pointer" (click)="toggleSidebar()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <div class="max-w-7xl mx-auto p-[3rem]" [ngClass]="{
+         'noPadding': (utilService.deviceTypeComputed() !== 'desktop' && utilService.deviceTypeComputed() !== 'tablet'),
+         'ultra-small-padding': isMobile
+       }">
+
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="title">
+                <h1 class="text-[2.4rem] font-bold text-white mb-2">Gestión de Clientes</h1>
+                <p class="text-gray-400">Administra y consulta la información de tus clientes</p>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8" data-aos="fade-right">
+            <!-- Total Clientes -->
+            <div
+                class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-users text-white text-xl"></i>
+                    <div>
+                        <p class="text-white/60 text-sm">Total Clientes</p>
+                        <p class="text-white text-2xl font-bold">{{ totalClientes }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clientes al Día -->
+            <div
+                class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-check-circle text-green-400 text-xl"></i>
+                    <div>
+                        <p class="text-white/60 text-sm">Al Día</p>
+                        <p class="text-white text-2xl font-bold">{{ clientesAlDia }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clientes Deudores -->
+            <div
+                class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-exclamation-triangle text-red-400 text-xl"></i>
+                    <div>
+                        <p class="text-white/60 text-sm">Deudores</p>
+                        <p class="text-white text-2xl font-bold">{{ clientesDeudores }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deuda Total -->
+            <div
+                class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-4">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-dollar-sign text-hover text-xl"></i>
+                    <div>
+                        <p class="text-white/60 text-sm">Deuda Total</p>
+                        <p class="text-white text-2xl font-bold">${{ deudaTotal.toLocaleString('es-AR') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Actions Bar -->
+        <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl p-6 mb-6"
+            data-aos="fade-right" data-aos-anchor-placement="top-bottom" data-aos-once="true">
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
+                <!-- Search Input -->
+                <div class="relative flex-1 max-w-md">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-white/60"></i>
+                    <input type="text" placeholder="Buscar por nombre o CUIT..."
+                        class="w-full bg-black/30 border border-border rounded-lg pl-10 pr-4 py-2 text-white placeholder-white/60 focus:outline-none focus:border-hover transition-colors"
+                        (input)="onSearchChange($event)">
+                </div>
+
+                <!-- Add Client Button -->
+                <button
+                    class="bg-hover hover:bg-main text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
+                    (click)="abrirModalCrearCliente()">
+                    <i class="fas fa-plus"></i>
+                    Agregar Cliente
+                </button>
+            </div>
+        </div>
+
+        <!-- Clients Table -->
+        <div class="bg-gradient-to-br from-background/80 to-background/60 backdrop-blur-sm border border-white rounded-xl overflow-hidden"
+            data-aos="fade-right" data-aos-anchor-placement="top-bottom" data-aos-once="true">
+            <!-- Table Header -->
+            <div class="bg-black/30 border-b border-border p-4">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+                    <div class="md:col-span-3 font-semibold text-white text-sm uppercase tracking-wider">
+                        <i class="fas fa-user mr-2"></i>Nombre
+                    </div>
+                    <div
+                        class="md:col-span-2 font-semibold text-white text-sm uppercase tracking-wider hidden md:block">
+                        <i class="fas fa-info-circle mr-2"></i>Estado
+                    </div>
+                    <div
+                        class="md:col-span-3 font-semibold text-white text-sm uppercase tracking-wider hidden md:block">
+                        <i class="fas fa-id-card mr-2"></i>CUIT/CUIL
+                    </div>
+                    <div
+                        class="md:col-span-2 font-semibold text-white text-sm uppercase tracking-wider hidden md:block">
+                        <i class="fas fa-dollar-sign mr-2"></i>Deuda
+                    </div>
+                    <div class="md:col-span-2 font-semibold text-white text-sm uppercase tracking-wider text-center">
+                        <i class="fas fa-cogs mr-2"></i>Acciones
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Body -->
+            <div class="max-h-[600px] overflow-y-auto">
+                @for (cliente of clientesFiltrados; track cliente.id) {
+                <div class="border-b border-border/30 p-4 hover:bg-black/20 transition-colors duration-200">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+
+                        <!-- Nombre -->
+                        <div class="md:col-span-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-hover/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-building text-hover"></i>
+                                </div>
+                                <div>
+                                    <p class="text-white font-medium">{{ cliente.nombre }}</p>
+                                    <p class="text-white/60 text-sm">ID: {{ cliente.id }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="md:col-span-2">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium" [ngClass]="{
+                    'bg-green-600/20 text-green-400 border border-green-600/30': cliente.estado === 'correcto',
+                    'bg-red-600/20 text-red-400 border border-red-600/30': cliente.estado === 'deudor'
+                  }">
+                                <i class="fas mr-2" [ngClass]="{
+                      'fa-check-circle': cliente.estado === 'correcto',
+                      'fa-exclamation-triangle': cliente.estado === 'deudor'
+                    }"></i>
+                                {{ cliente.estado === 'correcto' ? 'Situación Correcta' : 'Deudor' }}
+                            </span>
+                        </div>
+
+                        <!-- CUIT/CUIL -->
+                        <div class="md:col-span-3 hidden md:block">
+                            <p class="text-white font-mono">{{ cliente.cuitCuil }}</p>
+                            <p class="text-white/60 text-sm" *ngIf="cliente.email">{{ cliente.email }}</p>
+                        </div>
+
+                        <!-- Deuda -->
+                        <div class="md:col-span-2 hidden md:block">
+                            <p class="text-white font-bold" [ngClass]="{
+                    'text-green-400': cliente.deuda === 0,
+                    'text-red-400': cliente.deuda && cliente.deuda > 0
+                  }">
+                                ${{ (cliente.deuda || 0).toLocaleString('es-AR') }}
+                            </p>
+                            <p class="text-white/60 text-sm" *ngIf="cliente.ultimoPago">
+                                Último pago: {{ cliente.ultimoPago }}
+                            </p>
+                        </div>
+
+                        <!-- Acciones -->
+                        <div class="md:col-span-2">
+                            <div class="flex items-center justify-center gap-2">
+                                <button
+                                    class="bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 p-2 rounded-lg transition-colors duration-200"
+                                    (click)="verDetalleCliente(cliente)" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button
+                                    class="bg-green-600/20 text-green-400 hover:bg-green-600/30 p-2 rounded-lg transition-colors duration-200"
+                                    (click)="contactarCliente(cliente)" title="WhatsApp" *ngIf="cliente.telefono">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                                <button
+                                    class="bg-gray-600/20 text-gray-400 hover:bg-gray-600/30 p-2 rounded-lg transition-colors duration-200"
+                                    (click)="enviarEmail(cliente)" title="Enviar email" *ngIf="cliente.email">
+                                    <i class="fas fa-envelope"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Mobile Info (visible only on mobile) -->
+                        <div class="md:hidden mt-3 pt-3 border-t border-border/30">
+                            <div class="grid grid-cols-2 gap-4 text-sm">
+                                <div>
+                                    <p class="text-white/60">CUIT/CUIL</p>
+                                    <p class="text-white font-mono">{{ cliente.cuitCuil }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-white/60">Deuda</p>
+                                    <p class="text-white font-bold" [ngClass]="{
+                        'text-green-400': cliente.deuda === 0,
+                        'text-red-400': cliente.deuda && cliente.deuda > 0
+                      }">
+                                        ${{ (cliente.deuda || 0).toLocaleString('es-AR') }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                } @empty {
+                <div class="p-8 text-center">
+                    <i class="fas fa-search text-white/40 text-4xl mb-4"></i>
+                    <p class="text-white/60 text-lg mb-2">No se encontraron clientes</p>
+                    <p class="text-white/40">Intenta con otros términos de búsqueda</p>
+                </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@if(showCreateModal()){
+<!-- Modal para crear cliente -->
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+    (click)="cerrarModalCrearCliente()">
+
+    <div class="bg-gradient-to-br from-background/95 to-background/90 backdrop-blur-sm border border-white rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+        (click)="$event.stopPropagation()">
+
+        <!-- Header del modal -->
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-user-plus text-hover text-2xl"></i>
+                <h2 class="text-2xl font-bold text-white">Agregar Nuevo Cliente</h2>
+            </div>
+            <button class="text-white/60 hover:text-white text-2xl transition-colors"
+                (click)="cerrarModalCrearCliente()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Formulario -->
+        <form [formGroup]="clientForm" (ngSubmit)="crearCliente()" class="space-y-6" data-aos="fade-right">
+
+            <!-- Nombre (Obligatorio) -->
+            <div>
+                <label class="block text-white font-medium mb-2">
+                    <i class="fas fa-user mr-2"></i>Nombre del Cliente *
+                </label>
+                <input type="text" formControlName="nombre" placeholder="Ej: GRUPO FAVA"
+                    class="w-full bg-black/30 border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none transition-colors"
+                    [class.border-red-500]="f['nombre'].invalid && f['nombre'].touched"
+                    [class.border-border]="f['nombre'].valid || !f['nombre'].touched"
+                    [class.border-hover]="f['nombre'].valid && f['nombre'].touched">
+                <!-- Mensaje de error -->
+                <div *ngIf="f['nombre'].invalid && f['nombre'].touched" class="text-red-400 text-sm mt-1">
+                    <span *ngIf="f['nombre'].errors?.['required']">El nombre es obligatorio</span>
+                    <span *ngIf="f['nombre'].errors?.['minlength']">El nombre debe tener al menos 2 caracteres</span>
+                </div>
+            </div>
+
+            <!-- CUIT/CUIL (Obligatorio) -->
+            <div>
+                <label class="block text-white font-medium mb-2">
+                    <i class="fas fa-id-card mr-2"></i>CUIT/CUIL *
+                </label>
+                <input type="text" formControlName="cuitCuil" placeholder="Ej: 20123456789"
+                    class="w-full bg-black/30 border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none transition-colors"
+                    [class.border-red-500]="f['cuitCuil'].invalid && f['cuitCuil'].touched"
+                    [class.border-border]="f['cuitCuil'].valid || !f['cuitCuil'].touched"
+                    [class.border-hover]="f['cuitCuil'].valid && f['cuitCuil'].touched">
+                <!-- Mensaje de error -->
+                <div *ngIf="f['cuitCuil'].invalid && f['cuitCuil'].touched" class="text-red-400 text-sm mt-1">
+                    <span *ngIf="f['cuitCuil'].errors?.['required']">El CUIT/CUIL es obligatorio</span>
+                    <span *ngIf="f['cuitCuil'].errors?.['pattern']">El CUIT/CUIL debe tener 11 dígitos</span>
+                </div>
+            </div>
+
+            <!-- Estado -->
+            <div>
+                <label class="block text-white font-medium mb-2">
+                    <i class="fas fa-info-circle mr-2"></i>Estado Inicial
+                </label>
+                <select formControlName="estado"
+                    class="w-full bg-black/30 border border-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-hover transition-colors">
+                    <option value="correcto">Situación Correcta</option>
+                    <option value="deudor">Deudor</option>
+                </select>
+            </div>
+
+            <!-- Fila con Teléfono y Email -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Teléfono -->
+                <div>
+                    <label class="block text-white font-medium mb-2">
+                        <i class="fas fa-phone mr-2"></i>Teléfono
+                    </label>
+                    <input type="tel" formControlName="telefono" placeholder="Ej: +54 11 1234-5678"
+                        class="w-full bg-black/30 border border-border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:border-hover transition-colors">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-white font-medium mb-2">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </label>
+                    <input type="email" formControlName="email" placeholder="Ej: contacto@empresa.com"
+                        class="w-full bg-black/30 border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none transition-colors"
+                        [class.border-red-500]="f['email'].invalid && f['email'].touched"
+                        [class.border-border]="f['email'].valid || !f['email'].touched"
+                        [class.border-hover]="f['email'].valid && f['email'].touched">
+                    <!-- Mensaje de error -->
+                    <div *ngIf="f['email'].invalid && f['email'].touched" class="text-red-400 text-sm mt-1">
+                        <span *ngIf="f['email'].errors?.['email']">Ingrese un email válido</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deuda (solo si el estado es deudor) -->
+            <div *ngIf="f['estado'].value === 'deudor'">
+                <label class="block text-white font-medium mb-2">
+                    <i class="fas fa-dollar-sign mr-2"></i>Deuda Inicial
+                </label>
+                <input type="number" formControlName="deuda" placeholder="0" min="0"
+                    class="w-full bg-black/30 border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none transition-colors"
+                    [class.border-red-500]="f['deuda'].invalid && f['deuda'].touched"
+                    [class.border-border]="f['deuda'].valid || !f['deuda'].touched"
+                    [class.border-hover]="f['deuda'].valid && f['deuda'].touched">
+                <!-- Mensaje de error -->
+                <div *ngIf="f['deuda'].invalid && f['deuda'].touched" class="text-red-400 text-sm mt-1">
+                    <span *ngIf="f['deuda'].errors?.['min']">La deuda no puede ser negativa</span>
+                </div>
+            </div>
+
+            <!-- Nota informativa -->
+            <div class="bg-blue-600/20 border border-blue-600/30 rounded-lg p-4">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-info-circle text-blue-400 mt-1"></i>
+                    <div>
+                        <p class="text-blue-400 font-medium mb-1">Información</p>
+                        <p class="text-white/80 text-sm">
+                            Los campos marcados con (*) son obligatorios. El cliente se agregará inmediatamente a la
+                            lista.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="flex gap-4 pt-4">
+                <button type="button"
+                    class="flex-1 bg-gray-600/20 text-gray-400 hover:bg-gray-600/30 px-6 py-3 rounded-lg font-medium transition-colors duration-200"
+                    (click)="cerrarModalCrearCliente()">
+                    <i class="fas fa-times mr-2"></i>Cancelar
+                </button>
+                <button type="submit"
+                    class="flex-1 bg-hover hover:bg-main text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    [disabled]="!validarFormulario()">
+                    <i class="fas fa-save mr-2"></i>Crear Cliente
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+}
+
+@if(showDetailModal()){
+<!-- Modal para ver/editar cliente -->
+<div class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+    (click)="cerrarModalDetalleCliente()">
+
+    <div class="bg-gradient-to-br from-background/95 to-background/90 backdrop-blur-sm border border-white rounded-xl p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto"
+        (click)="$event.stopPropagation()">
+
+        <!-- Header del modal -->
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-user-edit text-hover text-2xl"></i>
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Detalles del Cliente</h2>
+                    <p class="text-white/60">ID: {{ selectedClient()?.id }}</p>
+                </div>
+            </div>
+            <button class="text-white/60 hover:text-white text-2xl transition-colors"
+                (click)="cerrarModalDetalleCliente()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Información adicional del cliente -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <!-- Estado actual -->
+            <div class="bg-black/30 rounded-lg p-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fas fa-info-circle text-blue-400"></i>
+                    <span class="text-white/60 text-sm">Estado Actual</span>
+                </div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium" [ngClass]="{
+                    'bg-green-600/20 text-green-400 border border-green-600/30': selectedClient()?.estado === 'correcto',
+                    'bg-red-600/20 text-red-400 border border-red-600/30': selectedClient()?.estado === 'deudor'
+                }">
+                    <i class="fas mr-2" [ngClass]="{
+                        'fa-check-circle': selectedClient()?.estado === 'correcto',
+                        'fa-exclamation-triangle': selectedClient()?.estado === 'deudor'
+                    }"></i>
+                    {{ selectedClient()?.estado === 'correcto' ? 'Situación Correcta' : 'Deudor' }}
+                </span>
+            </div>
+
+            <!-- Deuda actual -->
+            <div class="bg-black/30 rounded-lg p-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fas fa-dollar-sign text-hover"></i>
+                    <span class="text-white/60 text-sm">Deuda Actual</span>
+                </div>
+                <p class="text-white font-bold text-lg" [ngClass]="{
+                    'text-green-400': (selectedClient()?.deuda || 0) === 0,
+                    'text-red-400': (selectedClient()?.deuda || 0) > 0
+                }">
+                    ${{ (selectedClient()?.deuda || 0).toLocaleString('es-AR') }}
+                </p>
+            </div>
+
+            <!-- Último pago -->
+            <div class="bg-black/30 rounded-lg p-4">
+                <div class="flex items-center gap-2 mb-2">
+                    <i class="fas fa-calendar text-green-400"></i>
+                    <span class="text-white/60 text-sm">Último Pago</span>
+                </div>
+                <p class="text-white font-medium">
+                    {{ selectedClient()?.ultimoPago || 'Sin registros' }}
+                </p>
+            </div>
+        </div>
+
+        <!-- Formulario de edición -->
+        <form [formGroup]="editClientForm" (ngSubmit)="actualizarCliente()" class="space-y-6">
+            
+            <!-- Nombre (Obligatorio) -->
+            <div>
+                <label class="block text-white font-medium mb-2">
+                    <i class="fas fa-user mr-2"></i>Nombre del Cliente *
+                </label>
+                <input type="text" formControlName="nombre" placeholder="Ej: GRUPO FAVA"
+                    class="w-full bg-black/30 border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none transition-colors"
+                    [class.border-red-500]="fe['nombre'].invalid && fe['nombre'].touched"
+                    [class.border-border]="fe['nombre'].valid || !fe['nombre'].touched"
+                    [class.border-hover]="fe['nombre'].valid && fe['nombre'].touched">
+                <!-- Mensaje de error -->
+                <div *ngIf="fe['nombre'].invalid && fe['nombre'].touched" class="text-red-400 text-sm mt-1">
+                    <span *ngIf="fe['nombre'].errors?.['required']">El nombre es obligatorio</span>
+                    <span *ngIf="fe['nombre'].errors?.['minlength']">El nombre debe tener al menos 2 caracteres</span>
+                </div>
+            </div>
+
+            <!-- CUIT/CUIL (Obligatorio) -->
+            <div>
+                <label class="block text-white font-medium mb-2">
+                    <i class="fas fa-id-card mr-2"></i>CUIT/CUIL *
+                </label>
+                <input type="text" formControlName="cuitCuil" placeholder="Ej: 20123456789"
+                    class="w-full bg-black/30 border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none transition-colors"
+                    [class.border-red-500]="fe['cuitCuil'].invalid && fe['cuitCuil'].touched"
+                    [class.border-border]="fe['cuitCuil'].valid || !fe['cuitCuil'].touched"
+                    [class.border-hover]="fe['cuitCuil'].valid && fe['cuitCuil'].touched">
+                <!-- Mensaje de error -->
+                <div *ngIf="fe['cuitCuil'].invalid && fe['cuitCuil'].touched" class="text-red-400 text-sm mt-1">
+                    <span *ngIf="fe['cuitCuil'].errors?.['required']">El CUIT/CUIL es obligatorio</span>
+                    <span *ngIf="fe['cuitCuil'].errors?.['pattern']">El CUIT/CUIL debe tener 11 dígitos</span>
+                </div>
+            </div>
+
+            <!-- Estado -->
+            <div>
+                <label class="block text-white font-medium mb-2">
+                    <i class="fas fa-info-circle mr-2"></i>Estado del Cliente
+                </label>
+                <select formControlName="estado"
+                    class="w-full bg-black/30 border border-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-hover transition-colors">
+                    <option value="correcto">Situación Correcta</option>
+                    <option value="deudor">Deudor</option>
+                </select>
+            </div>
+
+            <!-- Fila con Teléfono y Email -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Teléfono -->
+                <div>
+                    <label class="block text-white font-medium mb-2">
+                        <i class="fas fa-phone mr-2"></i>Teléfono
+                    </label>
+                    <input type="tel" formControlName="telefono" placeholder="Ej: +54 11 1234-5678"
+                        class="w-full bg-black/30 border border-border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none focus:border-hover transition-colors">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-white font-medium mb-2">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </label>
+                    <input type="email" formControlName="email" placeholder="Ej: contacto@empresa.com"
+                        class="w-full bg-black/30 border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none transition-colors"
+                        [class.border-red-500]="fe['email'].invalid && fe['email'].touched"
+                        [class.border-border]="fe['email'].valid || !fe['email'].touched"
+                        [class.border-hover]="fe['email'].valid && fe['email'].touched">
+                    <!-- Mensaje de error -->
+                    <div *ngIf="fe['email'].invalid && fe['email'].touched" class="text-red-400 text-sm mt-1">
+                        <span *ngIf="fe['email'].errors?.['email']">Ingrese un email válido</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deuda (solo si el estado es deudor) -->
+            <div *ngIf="fe['estado'].value === 'deudor'">
+                <label class="block text-white font-medium mb-2">
+                    <i class="fas fa-dollar-sign mr-2"></i>Deuda Actual
+                </label>
+                <input type="number" formControlName="deuda" placeholder="0" min="0"
+                    class="w-full bg-black/30 border rounded-lg px-4 py-3 text-white placeholder-white/60 focus:outline-none transition-colors"
+                    [class.border-red-500]="fe['deuda'].invalid && fe['deuda'].touched"
+                    [class.border-border]="fe['deuda'].valid || !fe['deuda'].touched"
+                    [class.border-hover]="fe['deuda'].valid && fe['deuda'].touched">
+                <!-- Mensaje de error -->
+                <div *ngIf="fe['deuda'].invalid && fe['deuda'].touched" class="text-red-400 text-sm mt-1">
+                    <span *ngIf="fe['deuda'].errors?.['min']">La deuda no puede ser negativa</span>
+                </div>
+            </div>
+
+            <!-- Nota informativa -->
+            <div class="bg-yellow-600/20 border border-yellow-600/30 rounded-lg p-4">
+                <div class="flex items-start gap-3">
+                    <i class="fas fa-exclamation-triangle text-yellow-400 mt-1"></i>
+                    <div>
+                        <p class="text-yellow-400 font-medium mb-1">Atención</p>
+                        <p class="text-white/80 text-sm">
+                            Los cambios se aplicarán inmediatamente. Revisa cuidadosamente la información antes de guardar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botones -->
+            <div class="flex gap-4 pt-4">
+                <button type="button"
+                    class="flex-1 bg-gray-600/20 text-gray-400 hover:bg-gray-600/30 px-6 py-3 rounded-lg font-medium transition-colors duration-200"
+                    (click)="cerrarModalDetalleCliente()">
+                    <i class="fas fa-times mr-2"></i>Cancelar
+                </button>
+                <button type="submit"
+                    class="flex-1 bg-hover hover:bg-main text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                    <i class="fas fa-save mr-2"></i>Guardar Cambios
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+}
+
+<!-- Mensaje de feedback de actualización -->
+@if(showUpdateFeedback()){
+<div class="fixed top-4 right-4 z-50 bg-green-600/90 text-white px-6 py-3 rounded-lg shadow-lg backdrop-blur-sm border border-green-500/30 animate-pulse">
+    <div class="flex items-center gap-3">
+        <i class="fas fa-check-circle text-green-300"></i>
+        <span class="font-medium">¡Cliente actualizado exitosamente!</span>
+    </div>
+</div>
+}
+
+<!-- Mensaje de feedback de creación -->
+@if(showCreateFeedback()){
+<div class="fixed top-4 right-4 z-50 bg-blue-600/90 text-white px-6 py-3 rounded-lg shadow-lg backdrop-blur-sm border border-blue-500/30 animate-pulse">
+    <div class="flex items-center gap-3">
+        <i class="fas fa-user-plus text-blue-300"></i>
+        <span class="font-medium">¡Cliente creado exitosamente!</span>
+    </div>
+</div>
+}
